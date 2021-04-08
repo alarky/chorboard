@@ -7,7 +7,9 @@
     "build": "vue-cli-service build"
   },
   "dependencies": {
+    "@types/webmidi": "^2.0.4",
     "core-js": "^3.6.5",
+    "tone": "^14.7.77",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^9.1.2"
