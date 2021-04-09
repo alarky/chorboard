@@ -8,12 +8,12 @@
       <div class="key" :class="{active: activeNotes[octave * 12 + 8]}">G#{{ octave }}</div>
       <div class="key" :class="{active: activeNotes[octave * 12 + 10]}">A#{{ octave }}</div>
       <div class="spacer"></div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 13]}">C#{{ octave + 1 }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 15]}">D#{{ octave + 1 }}</div>
+      <div class="key" :class="{active: activeNotes[octave * 12 + 13]}">C#{{ Number(octave) + 1 }}</div>
+      <div class="key" :class="{active: activeNotes[octave * 12 + 15]}">D#{{ Number(octave) + 1 }}</div>
       <div class="spacer"></div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 18]}">F#{{ octave + 1 }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 20]}">G#{{ octave + 1 }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 22]}">A#{{ octave + 1 }}</div>
+      <div class="key" :class="{active: activeNotes[octave * 12 + 18]}">F#{{ Number(octave) + 1 }}</div>
+      <div class="key" :class="{active: activeNotes[octave * 12 + 20]}">G#{{ Number(octave) + 1 }}</div>
+      <div class="key" :class="{active: activeNotes[octave * 12 + 22]}">A#{{ Number(octave) + 1 }}</div>
     </div>
     <div class="white-keys">
       <div class="key" :class="{active: activeNotes[octave * 12]}">C{{ octave }}</div>
@@ -23,14 +23,14 @@
       <div class="key" :class="{active: activeNotes[octave * 12 + 7]}">G{{ octave }}</div>
       <div class="key" :class="{active: activeNotes[octave * 12 + 9]}">A{{ octave }}</div>
       <div class="key" :class="{active: activeNotes[octave * 12 + 11]}">B{{ octave }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 12]}">C{{ octave + 1 }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 14]}">D{{ octave + 1 }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 16]}">E{{ octave + 1 }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 17]}">F{{ octave + 1 }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 19]}">G{{ octave + 1 }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 21]}">A{{ octave + 1 }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 23]}">B{{ octave + 1 }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 24]}">C{{ octave + 2 }}</div>
+      <div class="key" :class="{active: activeNotes[octave * 12 + 12]}">C{{ Number(octave) + 1 }}</div>
+      <div class="key" :class="{active: activeNotes[octave * 12 + 14]}">D{{ Number(octave) + 1 }}</div>
+      <div class="key" :class="{active: activeNotes[octave * 12 + 16]}">E{{ Number(octave) + 1 }}</div>
+      <div class="key" :class="{active: activeNotes[octave * 12 + 17]}">F{{ Number(octave) + 1 }}</div>
+      <div class="key" :class="{active: activeNotes[octave * 12 + 19]}">G{{ Number(octave) + 1 }}</div>
+      <div class="key" :class="{active: activeNotes[octave * 12 + 21]}">A{{ Number(octave) + 1 }}</div>
+      <div class="key" :class="{active: activeNotes[octave * 12 + 23]}">B{{ Number(octave) + 1 }}</div>
+      <div class="key" :class="{active: activeNotes[octave * 12 + 24]}">C{{ Number(octave) + 2 }}</div>
     </div>
   </div>
 </template>

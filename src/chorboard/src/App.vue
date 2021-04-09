@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <input type="number" v-model="activeOctave">
     <Keyboard :octave="activeOctave" :active-notes="activeNotes"></Keyboard>
     {{ activeNotes }}
   </div>
