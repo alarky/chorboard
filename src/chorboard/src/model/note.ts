@@ -17,21 +17,24 @@ const noteNameMap: {[name: number]: string} = {
 
 export default class Note {
     public readonly number: number = 0;
+    public readonly velocity: number = 0;
     public readonly name: string = "";
     public readonly octave: number = 0;
-    public readonly freq: number = 0;
 
-    constructor(number: number) {
+    constructor(number: number, velocity: number = 0) {
         this.number = number;
+        this.velocity = velocity;
 
         const remainder = number % 12;
         this.name = noteNameMap[remainder];
         this.octave = (number - remainder) / 12;
-
-        this.freq = 2 ** ((number - 69) / 12) * 440
     }
 
-    public get asStr() {
+    public get asStr(): string {
         return `${this.name}${this.octave}`;
+    }
+
+    public get normalizedVelocity(): number {
+        return this.velocity / 127;
     }
 }

@@ -1,8 +1,20 @@
 <template>
   <div id="app">
-    <button @click="ToneStart">Tone Start</button>
+    {{ activeNotes }}
   </div>
 </template>
+
+<style lang="scss">
+html, body {
+  height: 100%;
+  margin: 0;
+}
+#app {
+  min-height: 100%;
+  background-color: black;
+  color: white;
+}
+</style>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
@@ -16,9 +28,8 @@ import Note from "@/model/note";
   },
 })
 export default class App extends Vue {
-  private ToneStart() {
-    Tone.start();
-  }
+  private activeNotes: {[name: number]: Note|undefined} = {};
+
   mounted() {
     console.log("mounted");
 
@@ -41,19 +52,25 @@ export default class App extends Vue {
         o = outputIterator.next();
       }
 
+      Tone.start();
+
       console.log(inputs);
       console.log(outputs);
 
       const synth = new Tone.PolySynth().toDestination();
 
       const noteOn = (noteNumber: number, velocity: number) => {
-        const note = new Note(noteNumber);
+        const note = new Note(noteNumber, velocity);
+        Vue.set(this.activeNotes, note.number, note);
+        console.log(note);
         const now = Tone.now();
-        synth.triggerAttack(note.asStr, now);
+        synth.triggerAttack(note.asStr, now, note.normalizedVelocity);
       }
 
       const noteOff = (noteNumber: number, velocity: number) => {
         const note = new Note(noteNumber);
+        Vue.set(this.activeNotes, note.number, undefined);
+        console.log(note);
         const now = Tone.now();
         synth.triggerRelease(note.asStr, now);
       }
