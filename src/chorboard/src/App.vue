@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Keyboard :octave="activeOctave" :active-notes="activeNotes"></Keyboard>
     {{ activeNotes }}
   </div>
 </template>
@@ -11,7 +12,7 @@ html, body {
 }
 #app {
   min-height: 100%;
-  background-color: black;
+  background-color: gray;
   color: white;
 }
 </style>
@@ -21,13 +22,16 @@ import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from './components/HelloWorld.vue';
 import * as Tone from 'tone';
 import Note from "@/model/note";
+import Keyboard from "@/components/Keyboard.vue";
 
 @Component({
   components: {
     HelloWorld,
+    Keyboard,
   },
 })
 export default class App extends Vue {
+  private activeOctave: number = 4;
   private activeNotes: {[name: number]: Note|undefined} = {};
 
   mounted() {
@@ -51,8 +55,6 @@ export default class App extends Vue {
         outputs.push(o.value);
         o = outputIterator.next();
       }
-
-      Tone.start();
 
       console.log(inputs);
       console.log(outputs);
