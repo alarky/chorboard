@@ -24,6 +24,8 @@ import HelloWorld from './components/HelloWorld.vue';
 import * as Tone from 'tone';
 import Note from "@/model/note";
 import Keyboard from "@/components/Keyboard.vue";
+import Synthesizer from "@/model/synthesizer";
+import Chord, {Seventh} from "@/model/chord";
 
 @Component({
   components: {
@@ -33,7 +35,7 @@ import Keyboard from "@/components/Keyboard.vue";
 })
 export default class App extends Vue {
   private activeOctave: number = 4;
-  private activeNotes: {[name: number]: Note|undefined} = {};
+  private activeNotes: {[name: number]: Note} = {};
 
   mounted() {
     console.log("mounted");
@@ -60,22 +62,20 @@ export default class App extends Vue {
       console.log(inputs);
       console.log(outputs);
 
-      const synth = new Tone.PolySynth().toDestination();
+      const synth = new Synthesizer();
 
       const noteOn = (noteNumber: number, velocity: number) => {
         const note = new Note(noteNumber, velocity);
-        Vue.set(this.activeNotes, note.number, note);
-        console.log(note);
-        const now = Tone.now();
-        synth.triggerAttack(note.asStr, now, note.normalizedVelocity);
+        const chord = new Chord(note, Seventh);
+        chord.notes.forEach((n) => Vue.set(this.activeNotes, n.number, n));
+        synth.update(this.activeNotes);
       }
 
       const noteOff = (noteNumber: number, velocity: number) => {
         const note = new Note(noteNumber);
-        Vue.set(this.activeNotes, note.number, undefined);
-        console.log(note);
-        const now = Tone.now();
-        synth.triggerRelease(note.asStr, now);
+        const chord = new Chord(note, Seventh);
+        chord.notes.forEach((n) => Vue.delete(this.activeNotes, n.number));
+        synth.update(this.activeNotes);
       }
 
       for (const input of inputs) {
