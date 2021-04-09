@@ -8,6 +8,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from './components/HelloWorld.vue';
 import * as Tone from 'tone';
+import Note from "@/model/note";
 
 @Component({
   components: {
@@ -46,15 +47,15 @@ export default class App extends Vue {
       const synth = new Tone.PolySynth().toDestination();
 
       const noteOn = (noteNumber: number, velocity: number) => {
-        const freq = 2 ** ((noteNumber - 69) / 12) * 440
+        const note = new Note(noteNumber);
         const now = Tone.now();
-        synth.triggerAttack(freq, now);
+        synth.triggerAttack(note.asStr, now);
       }
 
       const noteOff = (noteNumber: number, velocity: number) => {
-        const freq = 2 ** ((noteNumber - 69) / 12) * 440
+        const note = new Note(noteNumber);
         const now = Tone.now();
-        synth.triggerRelease(freq, now);
+        synth.triggerRelease(note.asStr, now);
       }
 
       for (const input of inputs) {
