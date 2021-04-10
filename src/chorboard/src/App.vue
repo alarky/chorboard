@@ -1,9 +1,16 @@
 <template>
   <div id="app">
-    <label for="full-velocity">FullVelocity</label>
-    <input type="checkbox" id="full-velocity" v-model="fullLevel">
-    <label for="octave">Octave</label>
-    <input type="number" id="octave" v-model="activeOctave">
+    <div>
+      <label for="full-velocity">FullVelocity</label>
+      <input type="checkbox" id="full-velocity" v-model="fullLevel">
+    </div>
+    <div>
+      <label for="octave">Octave</label>
+      <input type="number" id="octave" v-model="activeOctave">
+    </div>
+
+    <ChordBoard :chord-name="activeChordName" @emit="activeChordName = $event"></ChordBoard>
+
     <KeyBoard :octave="activeOctave" :active-notes="activeNotes"></KeyBoard>
   </div>
 </template>
@@ -28,10 +35,12 @@ import Note from "@/model/note";
 import KeyBoard from "@/components/KeyBoard.vue";
 import Synthesizer from "@/model/synthesizer";
 import Chord, {ChordTypes} from "@/model/chord";
+import ChordBoard from "@/components/ChordBoard.vue";
 
 @Component({
   components: {
     HelloWorld,
+    ChordBoard,
     KeyBoard,
   },
 })
@@ -39,6 +48,7 @@ export default class App extends Vue {
   private fullLevel: boolean = false;
   private activeOctave: number = 4;
   private activeNotes: {[name: number]: Note} = {};
+  private activeChordName: string = "None";
 
   mounted() {
     console.log("mounted");
@@ -72,14 +82,14 @@ export default class App extends Vue {
           velocity = 127;
         }
         const note = new Note(noteNumber, velocity);
-        const chord = new Chord(note, ChordTypes.Seventh);
+        const chord = new Chord(note, ChordTypes[this.activeChordName]);
         chord.notes.forEach((n) => Vue.set(this.activeNotes, n.number, n));
         synth.update(this.activeNotes);
       }
 
       const noteOff = (noteNumber: number, velocity: number) => {
         const note = new Note(noteNumber);
-        const chord = new Chord(note, ChordTypes.Seventh);
+        const chord = new Chord(note, ChordTypes[this.activeChordName]);
         chord.notes.forEach((n) => Vue.delete(this.activeNotes, n.number));
         synth.update(this.activeNotes);
       }
