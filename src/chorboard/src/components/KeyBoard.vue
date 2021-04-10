@@ -80,7 +80,7 @@ import { Component, Prop, Vue } from 'vue-property-decorator';
 import Note from "@/model/note";
 
 @Component
-export default class Keyboard extends Vue {
+export default class KeyBoard extends Vue {
   @Prop({default:5})
   private octave!: number;
 

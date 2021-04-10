@@ -4,7 +4,7 @@
     <input type="checkbox" id="full-velocity" v-model="fullLevel">
     <label for="octave">Octave</label>
     <input type="number" id="octave" v-model="activeOctave">
-    <Keyboard :octave="activeOctave" :active-notes="activeNotes"></Keyboard>
+    <KeyBoard :octave="activeOctave" :active-notes="activeNotes"></KeyBoard>
   </div>
 </template>
 
@@ -25,14 +25,14 @@ import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from './components/HelloWorld.vue';
 import * as Tone from 'tone';
 import Note from "@/model/note";
-import Keyboard from "@/components/Keyboard.vue";
+import KeyBoard from "@/components/KeyBoard.vue";
 import Synthesizer from "@/model/synthesizer";
 import Chord, {ChordTypes} from "@/model/chord";
 
 @Component({
   components: {
     HelloWorld,
-    Keyboard,
+    KeyBoard,
   },
 })
 export default class App extends Vue {
