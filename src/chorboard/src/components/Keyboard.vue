@@ -46,6 +46,7 @@
 }
 
 .key {
+  box-sizing: border-box;
   margin: 3px;
   height: 80px;
   width: 40px;

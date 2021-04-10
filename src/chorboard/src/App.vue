@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <input type="number" v-model="activeOctave">
+    <label for="full-velocity">FullVelocity</label>
+    <input type="checkbox" id="full-velocity" v-model="fullLevel">
+    <label for="octave">Octave</label>
+    <input type="number" id="octave" v-model="activeOctave">
     <Keyboard :octave="activeOctave" :active-notes="activeNotes"></Keyboard>
-    {{ activeNotes }}
   </div>
 </template>
 
@@ -25,7 +27,7 @@ import * as Tone from 'tone';
 import Note from "@/model/note";
 import Keyboard from "@/components/Keyboard.vue";
 import Synthesizer from "@/model/synthesizer";
-import Chord, {Seventh} from "@/model/chord";
+import Chord, {ChordTypes} from "@/model/chord";
 
 @Component({
   components: {
@@ -34,6 +36,7 @@ import Chord, {Seventh} from "@/model/chord";
   },
 })
 export default class App extends Vue {
+  private fullLevel: boolean = false;
   private activeOctave: number = 4;
   private activeNotes: {[name: number]: Note} = {};
 
@@ -65,15 +68,18 @@ export default class App extends Vue {
       const synth = new Synthesizer();
 
       const noteOn = (noteNumber: number, velocity: number) => {
+        if (this.fullLevel) {
+          velocity = 127;
+        }
         const note = new Note(noteNumber, velocity);
-        const chord = new Chord(note, Seventh);
+        const chord = new Chord(note, ChordTypes.Seventh);
         chord.notes.forEach((n) => Vue.set(this.activeNotes, n.number, n));
         synth.update(this.activeNotes);
       }
 
       const noteOff = (noteNumber: number, velocity: number) => {
         const note = new Note(noteNumber);
-        const chord = new Chord(note, Seventh);
+        const chord = new Chord(note, ChordTypes.Seventh);
         chord.notes.forEach((n) => Vue.delete(this.activeNotes, n.number));
         synth.update(this.activeNotes);
       }
