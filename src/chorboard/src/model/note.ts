@@ -1,5 +1,5 @@
 
-const noteNameMap: {[name: number]: string} = {
+export const NoteNameMap: {[name: number]: string} = {
     0: "C",
     1: "C#",
     2: "D",
@@ -26,7 +26,7 @@ export default class Note {
         this.velocity = velocity;
 
         const remainder = number % 12;
-        this.name = noteNameMap[remainder];
+        this.name = NoteNameMap[remainder];
         this.octave = (number - remainder) / 12;
     }
 

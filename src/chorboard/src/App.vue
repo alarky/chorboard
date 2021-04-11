@@ -9,6 +9,14 @@
       <input type="number" id="octave" v-model="activeOctave">
     </div>
 
+    <div>
+      Mode:
+      <input type="radio">Chord
+      <input type="radio">Scale
+    </div>
+
+    <ScaleBoard></ScaleBoard>
+
     <ChordBoard :chord-name="activeChordName" @emit="activeChordName = $event"></ChordBoard>
 
     <KeyBoard :octave="activeOctave" :active-notes="activeNotes"></KeyBoard>
@@ -36,10 +44,12 @@ import KeyBoard from "@/components/KeyBoard.vue";
 import Synthesizer from "@/model/synthesizer";
 import Chord, {ChordTypes} from "@/model/chord";
 import ChordBoard from "@/components/ChordBoard.vue";
+import ScaleBoard from "@/components/ScaleBoard.vue";
 
 @Component({
   components: {
     HelloWorld,
+    ScaleBoard,
     ChordBoard,
     KeyBoard,
   },
