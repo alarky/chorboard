@@ -38,7 +38,6 @@ html, body {
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from './components/HelloWorld.vue';
-import * as Tone from 'tone';
 import Note from "@/model/note";
 import KeyBoard from "@/components/KeyBoard.vue";
 import Synthesizer from "@/model/synthesizer";

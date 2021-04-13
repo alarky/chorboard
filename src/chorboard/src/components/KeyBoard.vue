@@ -1,36 +1,36 @@
 <template>
   <div class="keyboard">
     <div class="black-keys">
-      <div class="key" :class="{active: activeNotes[octave * 12 + 1]}">C#{{ octave }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 3]}">D#{{ octave }}</div>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 1"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 3"></Key>
       <div class="spacer"></div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 6]}">F#{{ octave }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 8]}">G#{{ octave }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 10]}">A#{{ octave }}</div>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 6"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 8"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 10"></Key>
       <div class="spacer"></div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 13]}">C#{{ Number(octave) + 1 }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 15]}">D#{{ Number(octave) + 1 }}</div>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 13"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 15"></Key>
       <div class="spacer"></div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 18]}">F#{{ Number(octave) + 1 }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 20]}">G#{{ Number(octave) + 1 }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 22]}">A#{{ Number(octave) + 1 }}</div>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 18"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 20"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 22"></Key>
     </div>
     <div class="white-keys">
-      <div class="key" :class="{active: activeNotes[octave * 12]}">C{{ octave }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 2]}">D{{ octave }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 4]}">E{{ octave }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 5]}">F{{ octave }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 7]}">G{{ octave }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 9]}">A{{ octave }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 11]}">B{{ octave }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 12]}">C{{ Number(octave) + 1 }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 14]}">D{{ Number(octave) + 1 }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 16]}">E{{ Number(octave) + 1 }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 17]}">F{{ Number(octave) + 1 }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 19]}">G{{ Number(octave) + 1 }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 21]}">A{{ Number(octave) + 1 }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 23]}">B{{ Number(octave) + 1 }}</div>
-      <div class="key" :class="{active: activeNotes[octave * 12 + 24]}">C{{ Number(octave) + 2 }}</div>
+      <Key :active-notes="activeNotes" :note-number="octave * 12"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 2"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 4"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 5"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 7"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 9"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 11"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 12"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 14"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 16"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 17"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 19"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 21"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 23"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 24"></Key>
     </div>
   </div>
 </template>
@@ -42,21 +42,21 @@
 }
 
 .black-keys {
-  padding-left: 20px;
+  padding-left: 40px;
 }
 
 .key {
   box-sizing: border-box;
   margin: 3px;
-  height: 80px;
-  width: 40px;
+  height: 113px;
+  width: 80px;
   border-radius: 5px;
   text-align: center;
 }
 
 .spacer {
   margin: 3px;
-  width: 40px;
+  width: 80px;
 }
 
 .black-keys > .key {
@@ -78,8 +78,13 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import Note from "@/model/note";
+import Key from "@/components/Key.vue";
 
-@Component
+@Component({
+  components: {
+    Key,
+  }
+})
 export default class KeyBoard extends Vue {
   @Prop({default:5})
   private octave!: number;
