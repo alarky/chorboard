@@ -72,7 +72,7 @@ export default class App extends Vue {
 
   }
 
-  private noteOn(noteNumber: number, velocity: number) {
+  private noteOn(noteNumber: number, velocity: number = 127) {
     if (this.fullLevel) {
       velocity = 127;
     }
@@ -82,7 +82,7 @@ export default class App extends Vue {
     this.synth.update(this.activeNotes);
   }
 
-  private noteOff(noteNumber: number, velocity: number) {
+  private noteOff(noteNumber: number, velocity: number = 0) {
     const note = new Note(noteNumber);
     const chord = new Chord(note, ChordTypes[this.activeChordName]);
     chord.notes.forEach((n) => Vue.delete(this.activeNotes, n.number));
