@@ -1,36 +1,36 @@
 <template>
   <div class="keyboard">
     <div class="black-keys">
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 1"></Key>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 3"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 1" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 3" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
       <div class="spacer"></div>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 6"></Key>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 8"></Key>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 10"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 6" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 8" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 10" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
       <div class="spacer"></div>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 13"></Key>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 15"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 13" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 15" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
       <div class="spacer"></div>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 18"></Key>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 20"></Key>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 22"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 18" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 20" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 22" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
     </div>
     <div class="white-keys">
-      <Key :active-notes="activeNotes" :note-number="octave * 12"></Key>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 2"></Key>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 4"></Key>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 5"></Key>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 7"></Key>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 9"></Key>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 11"></Key>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 12"></Key>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 14"></Key>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 16"></Key>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 17"></Key>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 19"></Key>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 21"></Key>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 23"></Key>
-      <Key :active-notes="activeNotes" :note-number="octave * 12 + 24"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 2" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 4" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 5" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 7" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 9" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 11" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 12" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 14" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 16" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 17" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 19" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 21" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 23" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
+      <Key :active-notes="activeNotes" :note-number="octave * 12 + 24" @noteon="noteOn($event)" @noteoff="noteOff($event)"></Key>
     </div>
   </div>
 </template>
@@ -91,5 +91,13 @@ export default class KeyBoard extends Vue {
 
   @Prop({default:{}})
   private activeNotes!: {[name: number]: Note};
+
+  private noteOn(e: any) {
+    this.$emit('noteon', e);
+  }
+
+  private noteOff(e: any) {
+    this.$emit('noteoff', e);
+  }
 }
 </script>

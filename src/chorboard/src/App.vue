@@ -19,7 +19,7 @@
 
     <ChordBoard :chord-name="activeChordName" @emit="activeChordName = $event"></ChordBoard>
 
-    <KeyBoard :octave="activeOctave" :active-notes="activeNotes"></KeyBoard>
+    <KeyBoard :octave="activeOctave" :active-notes="activeNotes" @noteon="noteOn($event)" @noteoff="noteOff($event)"></KeyBoard>
   </div>
 </template>
 

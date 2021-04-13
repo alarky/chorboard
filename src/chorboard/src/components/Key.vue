@@ -1,6 +1,9 @@
 <template>
-  <div class="key" :class="{active: activeNotes[noteNumber]}">
-    {{ noteName }}{{ octave }}
+  <div class="key" :class="{active: isActive}"
+       @mousedown="on"
+       @mouseup="off"
+       @mouseout="off"
+    >
   </div>
 </template>
 
@@ -20,6 +23,10 @@ export default class Key extends Vue {
   @Prop({default: 0})
   private noteNumber!: number;
 
+  private get isActive(): boolean {
+    return !!this.activeNotes[this.noteNumber];
+  }
+
   private get keyNumber(): number {
     return this.noteNumber % 12;
   }
@@ -30,6 +37,17 @@ export default class Key extends Vue {
 
   private get noteName(): string {
     return NoteNameMap[this.keyNumber];
+  }
+
+  private on(e: any) {
+    console.log(`${this.noteNumber}: on`);
+    this.$emit("noteon", this.noteNumber);
+  }
+
+  private off(e: any) {
+    if (this.isActive) {
+      this.$emit("noteoff", this.noteNumber);
+    }
   }
 }
 </script>
