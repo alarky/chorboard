@@ -45,6 +45,7 @@ import Synthesizer from "@/model/synthesizer";
 import Chord, {ChordTypes} from "@/model/chord";
 import ChordBoard from "@/components/ChordBoard.vue";
 import ScaleBoard from "@/components/ScaleBoard.vue";
+import MidiIO from "@/model/midiio";
 
 @Component({
   components: {
@@ -60,69 +61,32 @@ export default class App extends Vue {
   private activeNotes: {[name: number]: Note} = {};
   private activeChordName: string = "None";
 
+  private midiIO!: MidiIO;
+  private synth!: Synthesizer;
+
   mounted() {
     console.log("mounted");
 
-    navigator.requestMIDIAccess({sysex: true}).then((midiAccess) => {
-      const inputs = [];
-      const outputs = [];
+    this.midiIO = new MidiIO(this.noteOn, this.noteOff);
+    this.synth = new Synthesizer();
 
-      const inputIterator = midiAccess.inputs.values();
-      const outputIterator = midiAccess.outputs.values();
+  }
 
-      let i = inputIterator.next();
-      while (!i.done) {
-        inputs.push(i.value);
-        i = inputIterator.next();
-      }
+  private noteOn(noteNumber: number, velocity: number) {
+    if (this.fullLevel) {
+      velocity = 127;
+    }
+    const note = new Note(noteNumber, velocity);
+    const chord = new Chord(note, ChordTypes[this.activeChordName]);
+    chord.notes.forEach((n) => Vue.set(this.activeNotes, n.number, n));
+    this.synth.update(this.activeNotes);
+  }
 
-      let o = outputIterator.next();
-      while (!o.done) {
-        outputs.push(o.value);
-        o = outputIterator.next();
-      }
-
-      console.log(inputs);
-      console.log(outputs);
-
-      const synth = new Synthesizer();
-
-      const noteOn = (noteNumber: number, velocity: number) => {
-        if (this.fullLevel) {
-          velocity = 127;
-        }
-        const note = new Note(noteNumber, velocity);
-        const chord = new Chord(note, ChordTypes[this.activeChordName]);
-        chord.notes.forEach((n) => Vue.set(this.activeNotes, n.number, n));
-        synth.update(this.activeNotes);
-      }
-
-      const noteOff = (noteNumber: number, velocity: number) => {
-        const note = new Note(noteNumber);
-        const chord = new Chord(note, ChordTypes[this.activeChordName]);
-        chord.notes.forEach((n) => Vue.delete(this.activeNotes, n.number));
-        synth.update(this.activeNotes);
-      }
-
-      for (const input of inputs) {
-        input.onmidimessage = (e) => {
-          switch (e.data[0] & 0xf0) {
-            case 0x90:
-              noteOn(e.data[1], e.data[2]);
-              break;
-            case 0x80:
-              noteOff(e.data[1], e.data[2]);
-              break;
-            default:
-              console.log("other message: ", e.data);
-              break;
-          }
-        }
-      }
-
-    }, (err) => {
-      console.log(err);
-    });
+  private noteOff(noteNumber: number, velocity: number) {
+    const note = new Note(noteNumber);
+    const chord = new Chord(note, ChordTypes[this.activeChordName]);
+    chord.notes.forEach((n) => Vue.delete(this.activeNotes, n.number));
+    this.synth.update(this.activeNotes);
   }
 }
 </script>

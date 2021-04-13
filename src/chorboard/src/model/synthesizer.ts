@@ -12,8 +12,6 @@ export default class Synthesizer {
     }
 
     public update(activeNotes: {[name: number]: Note}) {
-        console.log(Object.values(this.activeNotes));
-        console.log(Object.values(activeNotes));
         for (const note of Object.values(activeNotes)) {
             if (!this.activeNotes[note.number]) {
                 const now = Tone.now();
