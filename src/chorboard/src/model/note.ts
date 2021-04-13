@@ -21,7 +21,7 @@ export default class Note {
     public readonly name: string = "";
     public readonly octave: number = 0;
 
-    constructor(number: number, velocity: number = 0) {
+    constructor(number: number, velocity = 0) {
         this.number = number;
         this.velocity = velocity;
 
