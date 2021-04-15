@@ -1,10 +1,11 @@
 <template>
   <div class="h-screen flex justify-between flex-col">
     <router-link to="/">
-      <h1 class="h-24 p-3 flex items-center bg-green-500 text-white text-2xl font-bold"> TODO APP composition API </h1>
+      <h1 class="font-header text-4xl italic">ChorBoard</h1>
+      <p>This app is choard assist keyboard.</p>
     </router-link>
+    <router-view />
   </div>
-  <router-view />
 </template>
 
 <style lang="scss">
