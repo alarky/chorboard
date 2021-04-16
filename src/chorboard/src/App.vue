@@ -1,7 +1,6 @@
 <template>
   <div class="app">
     <div class="container mx-auto py-4">
-      <Header></Header>
       <router-view />
     </div>
   </div>
@@ -17,13 +16,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Header from '@/components/Header.vue';
 
 export default defineComponent({
   name: 'App',
-  components: {
-    Header,
-  },
   setup() {
     return {
     }
