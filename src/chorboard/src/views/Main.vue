@@ -1,11 +1,12 @@
 <template>
   <div>
-    <div class="font-header italic mb-1">settings</div>
-    <div class="flex flex-row">
-      <Button class="mx-1 my-1 px-4 py-2 w-40" :label="'FullVelocity'"></Button>
-      <Button class="mx-1 my-1 px-4 py-2 w-40"></Button>
-      <Button class="mx-1 my-1 px-4 py-2 w-40"></Button>
+    <div class="flex flex-row mb-4">
+      <h1 class="font-header text-4xl italic">ChorBoard</h1>
+      <Button class="mx-8 px-4 py-2 w-40" :label="'FullVelocity'"></Button>
     </div>
+
+    <KeyBoard></KeyBoard>
+
 
     <!--
     <div>
@@ -24,10 +25,11 @@
 import {computed, defineComponent} from 'vue';
 import { useStore } from '@/store';
 import Button from "@/components/Button.vue";
+import KeyBoard from "@/components/KeyBoard.vue";
 
 export default defineComponent({
   name: 'Main',
-  components: {Button},
+  components: {KeyBoard, Button},
   setup() {
     const store = useStore();
 
