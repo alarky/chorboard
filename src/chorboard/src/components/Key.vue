@@ -1,8 +1,9 @@
 <template>
   <div class="key" :class="{
-    active: isActive,
     black: isBlack,
     white: !isBlack,
+    active: isActive,
+    auto: isAuto,
     }"
        @mousedown="on"
        @mouseup="off"
@@ -12,6 +13,8 @@
 </template>
 
 <style scoped lang="scss">
+@import "@/assets/scss/light.scss";
+
 .key {
   @apply rounded-xl;
 }
@@ -24,8 +27,24 @@
   @apply nm-concave-gray-50;
 }
 
-.black-keys > .active, .white-keys > .active {
-  background-color: red;
+.black.active {
+  @apply nm-flat-gray-600;
+  @apply light-red;
+}
+
+.white.active {
+  @apply nm-flat-white;
+  @apply light-red;
+}
+
+.black.auto {
+  @apply nm-flat-gray-600;
+  @apply light-green;
+}
+
+.white.auto {
+  @apply nm-flat-white;
+  @apply light-green;
 }
 
 </style>
@@ -42,7 +61,8 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const isActive = computed(() => false);
+    const isActive = computed(() => props.noteNumber == 60 || props.noteNumber == 61);
+    const isAuto = computed(() => props.noteNumber == 62 || props.noteNumber == 63);
 
     const on = (e: any) => {
       console.log(e);
@@ -59,6 +79,7 @@ export default defineComponent({
 
     return {
       isActive,
+      isAuto,
       on,
       off,
       isBlack,
