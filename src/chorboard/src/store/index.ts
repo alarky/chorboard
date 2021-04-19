@@ -3,7 +3,7 @@ import {createStore, useStore as baseUseStore, Store} from 'vuex'
 
 export interface State {
   fullLevel: boolean
-  octave: number
+  activeOctave: number
 }
 
 export const key: InjectionKey<Store<State>> = Symbol();
@@ -11,16 +11,16 @@ export const key: InjectionKey<Store<State>> = Symbol();
 export const store = createStore<State>({
   state: {
     fullLevel: false,
-    octave: 5,
+    activeOctave: 4,
   },
   mutations: {
     fullLevel(state, {v}) {
       console.log("set full level", v);
       state.fullLevel = v;
     },
-    octave(state, {v}) {
+    activeOctave(state, {v}) {
       console.log("set octave", v);
-      state.octave = v;
+      state.activeOctave = v;
     },
   },
   actions: {
