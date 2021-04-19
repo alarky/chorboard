@@ -4,9 +4,11 @@
       <h1 class="font-header text-4xl italic">ChorBoard</h1>
     </div>
 
+    <!--
     <div class="mb-4">
       <button class="nm-flat-gray-300">button</button>
     </div>
+    -->
 
 
     <KeyBoard></KeyBoard>

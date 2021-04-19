@@ -21,7 +21,7 @@
 }
 
 .white {
-  @apply nm-concave-gray-100;
+  @apply nm-concave-gray-50;
 }
 
 .black-keys > .active, .white-keys > .active {
