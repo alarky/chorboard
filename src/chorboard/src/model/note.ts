@@ -25,9 +25,9 @@ export default class Note {
         this.number = number;
         this.velocity = velocity;
 
-        const remainder = number % 12;
-        this.name = NoteNameMap[remainder];
-        this.octave = (number - remainder) / 12;
+        const tone = number % 12;
+        this.name = NoteNameMap[tone];
+        this.octave = (number - tone) / 12;
     }
 
     public get asStr(): string {

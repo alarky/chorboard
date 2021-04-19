@@ -45,8 +45,7 @@
   @apply px-4;
   @apply py-2;
   @apply rounded-xl;
-  box-shadow:  4px  4px 10px #aaaaaa,
-              -4px -4px 10px #ffffff;
+  @apply nm-flat-gray-300;
 }
 
 .keys {
@@ -67,25 +66,12 @@
   margin: 5px;
   height: 120px;
   width: 70px;
-  @apply rounded-xl;
 }
 
 .spacer {
   margin: 5px;
   height: 120px;
   width: 70px;
-}
-
-.black-keys > .key {
-  @apply bg-gray-800;
-}
-
-.white-keys > .key {
-  @apply bg-gray-50;
-}
-
-.black-keys > .active, .white-keys > .active {
-  background-color: red;
 }
 
 </style>

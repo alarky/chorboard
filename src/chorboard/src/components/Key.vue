@@ -1,5 +1,9 @@
 <template>
-  <div class="key" :class="{active: isActive}"
+  <div class="key" :class="{
+    active: isActive,
+    black: isBlack,
+    white: !isBlack,
+    }"
        @mousedown="on"
        @mouseup="off"
        @mouseout="off"
@@ -9,8 +13,21 @@
 
 <style scoped lang="scss">
 .key {
-  box-shadow:  0 5px 10px #888888;
+  @apply rounded-xl;
 }
+
+.black {
+  @apply nm-concave-gray-400;
+}
+
+.white {
+  @apply nm-concave-gray-100;
+}
+
+.black-keys > .active, .white-keys > .active {
+  background-color: red;
+}
+
 </style>
 
 <script lang="ts">
@@ -18,7 +35,13 @@ import { defineComponent, computed } from 'vue';
 
 export default defineComponent({
   name: 'Key',
-  setup() {
+  props: {
+    noteNumber: {
+      type: Number,
+      default: 0,
+    },
+  },
+  setup(props) {
     const isActive = computed(() => false);
 
     const on = (e: any) => {
@@ -29,10 +52,16 @@ export default defineComponent({
       console.log(e);
     };
 
+    const isBlack = computed(() => {
+      const tone = props.noteNumber % 12;
+      return [1, 3, 6, 8, 10].includes(tone);
+    });
+
     return {
       isActive,
       on,
       off,
+      isBlack,
     }
   }
 });
