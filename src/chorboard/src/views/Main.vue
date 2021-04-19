@@ -4,11 +4,15 @@
       <h1 class="font-header text-4xl italic">ChorBoard</h1>
     </div>
 
-    <!--
     <div class="mb-4">
-      <button class="nm-flat-gray-300">button</button>
+      <input type="text" class="input" />
+      <button class="button">button</button>
+      <select class="select">
+        <option>option</option>
+        <option>option</option>
+        <option>option</option>
+      </select>
     </div>
-    -->
 
 
     <KeyBoard></KeyBoard>

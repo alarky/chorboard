@@ -26,5 +26,8 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require('tailwindcss-neumorphism')],
+  plugins: [
+      require('@tailwindcss/forms'),
+      require('tailwindcss-neumorphism'),
+  ],
 }

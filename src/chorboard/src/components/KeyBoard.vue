@@ -45,7 +45,7 @@
   @apply px-4;
   @apply py-2;
   @apply rounded-xl;
-  @apply nm-flat-gray-300;
+  @apply nm-flat-gray-300-lg;
 }
 
 .keys {

@@ -12,6 +12,7 @@
   @apply bg-gray-300;
   @apply text-gray-600;
 }
+
 </style>
 
 <script lang="ts">

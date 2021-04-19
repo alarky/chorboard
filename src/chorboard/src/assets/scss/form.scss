@@ -1,0 +1,19 @@
+
+input, select, button {
+  @apply m-4;
+  @apply rounded-xl;
+}
+
+input[type='text'], select {
+  @apply px-8;
+  @apply py-2;
+  @apply rounded-xl;
+  @apply nm-inset-gray-300;
+  border: none;
+}
+
+button {
+  @apply px-8;
+  @apply py-2;
+  @apply nm-flat-gray-300;
+}
