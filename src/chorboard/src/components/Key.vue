@@ -55,14 +55,17 @@ import { defineComponent, computed } from 'vue';
 export default defineComponent({
   name: 'Key',
   props: {
-    noteNumber: {
+    number: {
       type: Number,
       default: 0,
     },
   },
   setup(props) {
-    const isActive = computed(() => props.noteNumber == 60 || props.noteNumber == 61);
-    const isAuto = computed(() => props.noteNumber == 62 || props.noteNumber == 63);
+    const octave = 5;
+    const noteNumber = computed(() => octave * 12 + props.number);
+
+    const isActive = computed(() => noteNumber.value == 60 || noteNumber.value == 61);
+    const isAuto = computed(() => noteNumber.value == 62 || noteNumber.value == 63);
 
     const on = (e: any) => {
       console.log(e);
@@ -73,11 +76,12 @@ export default defineComponent({
     };
 
     const isBlack = computed(() => {
-      const tone = props.noteNumber % 12;
+      const tone = noteNumber.value % 12;
       return [1, 3, 6, 8, 10].includes(tone);
     });
 
     return {
+      noteNumber,
       isActive,
       isAuto,
       on,
