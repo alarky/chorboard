@@ -6,8 +6,8 @@ class midiIO {
     private inputs!: MIDIInput[];
     private outputs!: MIDIOutput[];
 
-    private noteOnHandler!: (noteNumber: number, velocity: number) => void;
-    private noteOffHandler!: (noteNumber: number, velocity: number) => void;
+    public noteOnHandler!: (noteNumber: number, velocity: number) => void;
+    public noteOffHandler!: (noteNumber: number, velocity: number) => void;
 
     constructor() {
         this.inputs = [];
