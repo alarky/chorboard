@@ -8,6 +8,7 @@
       <ActiveOctave></ActiveOctave>
     </div>
 
+    <ChordBoard></ChordBoard>
 
     <KeyBoard></KeyBoard>
 
@@ -38,10 +39,12 @@ import {computed, defineComponent} from 'vue';
 import { useStore } from '@/store';
 import KeyBoard from "@/components/KeyBoard.vue";
 import ActiveOctave from "@/components/ActiveOctave.vue";
+import ChordBoard from "@/components/ChordBoard.vue";
 
 export default defineComponent({
   name: 'Main',
   components: {
+    ChordBoard,
     KeyBoard,
     ActiveOctave,
   },
