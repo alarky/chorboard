@@ -51,6 +51,7 @@
 
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
+import {useStore} from "@/store";
 
 export default defineComponent({
   name: 'Key',
@@ -61,8 +62,9 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const octave = 5;
-    const noteNumber = computed(() => octave * 12 + props.number);
+    const store = useStore();
+
+    const noteNumber = computed(() => store.state.activeOctave * 12 + props.number);
 
     const isActive = computed(() => noteNumber.value == 60 || noteNumber.value == 61);
     const isAuto = computed(() => noteNumber.value == 62 || noteNumber.value == 63);

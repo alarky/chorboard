@@ -11,7 +11,7 @@ export const key: InjectionKey<Store<State>> = Symbol();
 export const store = createStore<State>({
   state: {
     fullLevel: false,
-    activeOctave: 4,
+    activeOctave: 5,
   },
   mutations: {
     fullLevel(state, {v}) {
