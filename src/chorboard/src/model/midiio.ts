@@ -9,13 +9,11 @@ export default class MidiIO {
     private noteOnHandler!: (noteNumber: number, velocity: number) => void;
     private noteOffHandler!: (noteNumber: number, velocity: number) => void;
 
-    constructor(
-            noteOnHandler: (noteNumber: number, velocity: number) => void,
-            noteOffHandler: (noteNumber: number, velocity: number) => void) {
+    constructor() {
         this.inputs = [];
         this.outputs = [];
-        this.noteOnHandler = noteOnHandler;
-        this.noteOffHandler = noteOffHandler;
+        this.noteOnHandler = (n, v) => {console.log(n, v)};
+        this.noteOffHandler = (n, v) => {console.log(n, v)};
 
         navigator.requestMIDIAccess({sysex: true}).then((midiAccess: MIDIAccess) => {
             const inputIterator = midiAccess.inputs.values();
