@@ -2,7 +2,7 @@ import Note from "@/model/note";
 import * as Tone from "tone";
 import {PolySynth} from "tone";
 
-export default class Synthesizer {
+class synthesizer {
     private synth: PolySynth;
     private activeNotes: {[name: number]: Note};
 
@@ -28,3 +28,6 @@ export default class Synthesizer {
         this.activeNotes = { ...activeNotes };
     }
 }
+
+const Synthesizer = new synthesizer();
+export default Synthesizer;

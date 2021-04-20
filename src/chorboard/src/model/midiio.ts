@@ -2,7 +2,7 @@ import MIDIInput = WebMidi.MIDIInput;
 import MIDIOutput = WebMidi.MIDIOutput;
 import MIDIAccess = WebMidi.MIDIAccess;
 
-export default class MidiIO {
+class midiIO {
     private inputs!: MIDIInput[];
     private outputs!: MIDIOutput[];
 
@@ -51,3 +51,6 @@ export default class MidiIO {
         });
     }
 }
+
+const MidiIO = new midiIO();
+export default MidiIO;
