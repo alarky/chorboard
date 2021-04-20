@@ -6,14 +6,6 @@
 
     <div class="controls">
       <ActiveOctave></ActiveOctave>
-
-      <input type="text" class="input" />
-      <button class="button">button</button>
-      <select class="select">
-        <option>option</option>
-        <option>option</option>
-        <option>option</option>
-      </select>
     </div>
 
 
