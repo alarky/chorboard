@@ -6,7 +6,6 @@ import Synthesizer from "@/model/synthesizer";
 
 export interface State {
   mouseIsDown: boolean
-  fullLevel: boolean
   activeOctave: number
   activeNotes: {[name: number]: Note}
 }
@@ -16,16 +15,12 @@ export const key: InjectionKey<Store<State>> = Symbol();
 export const store = createStore<State>({
   state: {
     mouseIsDown: false,
-    fullLevel: false,
     activeOctave: 4,
     activeNotes: {},
   },
   mutations: {
     mouseIsDown(state, {v}) {
       state.mouseIsDown = v;
-    },
-    fullLevel(state, {v}) {
-      state.fullLevel = v;
     },
     activeOctave(state, {v}) {
       state.activeOctave = v;

@@ -48,13 +48,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
 
-    const fullLevel = computed({
-      get: () => store.state.fullLevel,
-      set: (v) => store.commit('fullLevel', {v}),
-    });
-
     return {
-      fullLevel,
     }
   }
 });
