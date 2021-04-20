@@ -4,12 +4,18 @@ input, select, button {
   @apply rounded-xl;
 }
 
-input[type='text'], select {
+input[type='text'],
+input[type='number'],
+select {
   @apply px-8;
   @apply py-2;
   @apply rounded-xl;
   @apply nm-inset-gray-300;
   border: none;
+}
+
+input[type='number'] {
+  @apply pr-3;
 }
 
 button {
