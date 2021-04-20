@@ -20,14 +20,16 @@ export default class Note {
     public readonly velocity: number = 0;
     public readonly name: string = "";
     public readonly octave: number = 0;
+    public readonly isAuto: boolean = false;
 
-    constructor(number: number, velocity = 0) {
+    constructor(number: number, velocity = 0, isAuto = false) {
         this.number = number;
         this.velocity = velocity;
 
         const tone = number % 12;
         this.name = NoteNameMap[tone];
         this.octave = (number - tone) / 12;
+        this.isAuto = isAuto;
     }
 
     public get asStr(): string {

@@ -31,6 +31,12 @@ export const store = createStore<State>({
     activeOctave(state, {v}) {
       state.activeOctave = v;
     },
+    addNote(state, {v}) {
+      state.activeNotes[v.number] = v;
+    },
+    delNote(state, {v}) {
+      delete state.activeNotes[v];
+    },
   },
   actions: {
   },

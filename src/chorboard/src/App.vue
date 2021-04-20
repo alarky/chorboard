@@ -1,8 +1,10 @@
 <template>
   <div class="app" @mousedown="mouseDown" @mouseup="mouseUp" @mouseleave="mouseUp">
-    {{ mouseIsDown }}
     <div class="container mx-auto py-4">
       <router-view />
+    </div>
+    <div>
+      <pre>{{ state }}</pre>
     </div>
   </div>
 </template>
@@ -36,6 +38,7 @@ export default defineComponent({
     }
 
     return {
+      state: store.state,
       mouseIsDown,
       mouseDown,
       mouseUp,

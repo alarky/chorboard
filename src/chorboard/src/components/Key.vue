@@ -8,6 +8,7 @@
        @mousedown="on"
        @mouseup="off"
        @mouseout="off"
+       @mouseenter="mouseEnter"
   >
   </div>
 </template>
@@ -28,22 +29,22 @@
 }
 
 .black.active {
-  @apply nm-flat-gray-600;
+  @apply nm-concave-gray-400;
   @apply light-red;
 }
 
 .white.active {
-  @apply nm-flat-white;
+  @apply nm-concave-gray-50;
   @apply light-red;
 }
 
 .black.auto {
-  @apply nm-flat-gray-600;
+  @apply nm-concave-gray-400;
   @apply light-green;
 }
 
 .white.auto {
-  @apply nm-flat-white;
+  @apply nm-concave-gray-50;
   @apply light-green;
 }
 
@@ -52,6 +53,7 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import {useStore} from "@/store";
+import Note from "@/model/note";
 
 export default defineComponent({
   name: 'Key',
@@ -66,16 +68,35 @@ export default defineComponent({
 
     const noteNumber = computed(() => store.state.activeOctave * 12 + props.number);
 
-    const isActive = computed(() => noteNumber.value == 60 || noteNumber.value == 61);
-    const isAuto = computed(() => noteNumber.value == 62 || noteNumber.value == 63);
+    const isActive = computed(() => {
+      const note = store.state.activeNotes[noteNumber.value];
+      if (!note) {
+        return false;
+      }
+      return !note.isAuto;
+    });
+    const isAuto = computed(() => {
+      const note = store.state.activeNotes[noteNumber.value];
+      if (!note) {
+        return false;
+      }
+      return note.isAuto;
+    });
 
-    const on = (e: any) => {
-      console.log(e);
+    const on = () => {
+      const note = new Note(noteNumber.value, 127);
+      store.commit('addNote', {v: note});
     };
 
-    const off = (e: any) => {
-      console.log(e);
+    const off = () => {
+      store.commit('delNote', {v: noteNumber.value});
     };
+
+    const mouseEnter = () => {
+      if (store.state.mouseIsDown) {
+        on();
+      }
+    }
 
     const isBlack = computed(() => {
       const tone = noteNumber.value % 12;
@@ -88,6 +109,7 @@ export default defineComponent({
       isAuto,
       on,
       off,
+      mouseEnter,
       isBlack,
     }
   }
