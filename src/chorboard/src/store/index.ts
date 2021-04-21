@@ -49,8 +49,12 @@ MidiIO.noteOnHandler = (noteNumber, velocity) => {
     store.commit('activeOctave', {v: octave});
   }
 
-  const note = new Note(noteNumber, velocity);
-  store.commit('addNote', {v: note});
+  if (velocity > 0) {
+    const note = new Note(noteNumber, velocity);
+    store.commit('addNote', {v: note});
+  } else {
+    store.commit('delNote', {v: noteNumber});
+  }
 };
 
 MidiIO.noteOffHandler = (noteNumber, velocity) => {
