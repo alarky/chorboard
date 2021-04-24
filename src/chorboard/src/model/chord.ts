@@ -30,9 +30,9 @@ export const ChordTypes: {[name: string]: number[]} = {
 export const ChordCymbols: {[name: string]: string} = {
     None:                  "",
 
-    Major:                 "M",
+    Major:                 "",
     Minor:                 "m",
-    MinorFlatFive:         "m-5",
+    MinorFlatFive:         "m(b5)",
     SuspendedFour:         "sus4",
     SuspendedTwo:          "sus2",
     Augmented:             "aug",
@@ -40,7 +40,7 @@ export const ChordCymbols: {[name: string]: string} = {
     Seventh:               "7",
     MajorSeventh:          "M7",
     MinorSeventh:          "m7",
-    MinorSeventhFlatFive:  "m7-5",
+    MinorSeventhFlatFive:  "m7(b5)",
     MinorMajorSeventh:     "mM7",
     SeventhSusFour:        "7sus4",
     SeventhSusTwo:         "7sus2",
@@ -55,9 +55,11 @@ export const ChordCymbols: {[name: string]: string} = {
 }
 
 export default class Chord {
+    private baseNote: Note;
     public notes: Note[];
 
     constructor(baseNote: Note, chord: number[]) {
+        this.baseNote = baseNote;
         this.notes = chord.map(n => new Note(baseNote.number + n, baseNote.velocity));
     }
 }

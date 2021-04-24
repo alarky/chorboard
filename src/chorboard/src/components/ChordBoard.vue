@@ -1,13 +1,24 @@
 <template>
   <div class="chord-board">
+    <h2>Diatonic Triad</h2>
     <div class="keys">
-      <ChordKey chord="CM7"></ChordKey>
-      <ChordKey chord="Dm7"></ChordKey>
-      <ChordKey chord="Em7"></ChordKey>
-      <ChordKey chord="FM7"></ChordKey>
-      <ChordKey chord="G7"></ChordKey>
-      <ChordKey chord="Am7"></ChordKey>
-      <ChordKey chord="Bm7(b5)"></ChordKey>
+      <ChordKey baseNoteName="C" chordName="Major"></ChordKey>
+      <ChordKey baseNoteName="D" chordName="Minor"></ChordKey>
+      <ChordKey baseNoteName="E" chordName="Minor"></ChordKey>
+      <ChordKey baseNoteName="F" chordName="Major"></ChordKey>
+      <ChordKey baseNoteName="G" chordName="Major"></ChordKey>
+      <ChordKey baseNoteName="A" chordName="Minor"></ChordKey>
+      <ChordKey baseNoteName="B" chordName="MinorFlatFive"></ChordKey>
+    </div>
+    <h2>Diatonic Tetrad</h2>
+    <div class="keys">
+      <ChordKey baseNoteName="C" chordName="MajorSeventh"></ChordKey>
+      <ChordKey baseNoteName="D" chordName="MinorSeventh"></ChordKey>
+      <ChordKey baseNoteName="E" chordName="MinorSeventh"></ChordKey>
+      <ChordKey baseNoteName="F" chordName="MajorSeventh"></ChordKey>
+      <ChordKey baseNoteName="G" chordName="Seventh"></ChordKey>
+      <ChordKey baseNoteName="A" chordName="MinorSeventh"></ChordKey>
+      <ChordKey baseNoteName="B" chordName="MinorSeventhFlatFive"></ChordKey>
     </div>
   </div>
 </template>
