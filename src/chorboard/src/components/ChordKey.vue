@@ -15,14 +15,13 @@
       <button class="rotate space-left">←</button>
       <button class="rotate space-left">→</button>
     </div>
-    <div class="chord-key-button"
+    <div class="chord-key-button" :class="{active: state.isOn}"
          @mousedown="on"
          @mouseup="off"
          @mouseout="off"
          @mouseenter="mouseEnter"
     >
       {{ chord }}
-
     </div>
   </div>
 </template>
@@ -31,7 +30,7 @@
 @import "@/assets/scss/light.scss";
 
 .chord-key {
-  height: 211px;
+  height: 180px;
   width: 130px;
 }
 
@@ -80,8 +79,13 @@ button {
 .chord-key-button {
   @apply rounded-xl;
   @apply nm-concave-gray-50;
-  height: 100px;
+  height: 120px;
   width: 100%;
+}
+
+.chord-key-button.active {
+  @apply nm-concave-gray-50;
+  @apply light-red;
 }
 
 
@@ -89,7 +93,7 @@ button {
 </style>
 
 <script lang="ts">
-import {computed, reactive, defineComponent} from 'vue';
+import {computed, reactive, defineComponent, watch} from 'vue';
 import { useStore } from '@/store';
 import Note, {NoteNameMap} from "@/model/note";
 import Chord, {ChordCymbols, ChordTypes} from "@/model/chord";
@@ -97,11 +101,16 @@ import Chord, {ChordCymbols, ChordTypes} from "@/model/chord";
 interface State {
   baseNoteName: string
   chordName: string
+  isOn: boolean
 }
 
 export default defineComponent({
   name: 'ChordKey',
   props: {
+    onKey: {
+      type: String,
+      default: "",
+    },
     baseNoteName: {
       type: String,
       default: "C",
@@ -117,6 +126,7 @@ export default defineComponent({
     const state = reactive<State>({
       baseNoteName: props.baseNoteName,
       chordName: props.chordName,
+      isOn: false,
     });
 
     const baseNoteNames = computed(() => {
@@ -139,6 +149,8 @@ export default defineComponent({
     }
 
     const on = () => {
+      if (state.isOn) return;
+      state.isOn = true;
       const baseNote = new Note(baseNoteNumber(), 127);
       const chord = new Chord(baseNote, ChordTypes[state.chordName]);
       for (const note of chord.notes) {
@@ -147,12 +159,22 @@ export default defineComponent({
     }
 
     const off = () => {
+      if (!state.isOn) return;
+      state.isOn = false;
       const baseNote = new Note(baseNoteNumber(), 127);
       const chord = new Chord(baseNote, ChordTypes[state.chordName]);
       for (const note of chord.notes) {
         store.commit('delNote', {v: note.number});
       }
     }
+
+    watch(store.state.keyIsDown, (newValue) => {
+      if (newValue[props.onKey]) {
+        on();
+      } else if (!newValue[props.onKey]) {
+        off();
+      }
+    }, {deep:true});
 
     const chord = computed(() => {
       return `${state.baseNoteName}${ChordCymbols[state.chordName]}`;

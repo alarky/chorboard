@@ -37,6 +37,14 @@ export default defineComponent({
       store.commit('mouseIsDown', {v: false});
     }
 
+    window.addEventListener('keydown', (e: any) => {
+      store.commit('keyDown', {v: e.key});
+    });
+
+    window.addEventListener('keyup', (e: any) => {
+      store.commit('keyUp', {v: e.key});
+    });
+
     return {
       state: store.state,
       mouseIsDown,

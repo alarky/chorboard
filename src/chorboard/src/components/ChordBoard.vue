@@ -1,22 +1,22 @@
 <template>
   <div class="chord-board">
     <div class="keys">
-      <ChordKey baseNoteName="C" chordName="Major"></ChordKey>
-      <ChordKey baseNoteName="D" chordName="Minor"></ChordKey>
-      <ChordKey baseNoteName="E" chordName="Minor"></ChordKey>
-      <ChordKey baseNoteName="F" chordName="Major"></ChordKey>
-      <ChordKey baseNoteName="G" chordName="Major"></ChordKey>
-      <ChordKey baseNoteName="A" chordName="Minor"></ChordKey>
-      <ChordKey baseNoteName="B" chordName="MinorFlatFive"></ChordKey>
+      <ChordKey onKey="q" baseNoteName="C" chordName="Major"></ChordKey>
+      <ChordKey onKey="w" baseNoteName="D" chordName="Minor"></ChordKey>
+      <ChordKey onKey="e" baseNoteName="E" chordName="Minor"></ChordKey>
+      <ChordKey onKey="r" baseNoteName="F" chordName="Major"></ChordKey>
+      <ChordKey onKey="t" baseNoteName="G" chordName="Major"></ChordKey>
+      <ChordKey onKey="y" baseNoteName="A" chordName="Minor"></ChordKey>
+      <ChordKey onKey="u" baseNoteName="B" chordName="MinorFlatFive"></ChordKey>
     </div>
     <div class="keys">
-      <ChordKey baseNoteName="C" chordName="MajorSeventh"></ChordKey>
-      <ChordKey baseNoteName="D" chordName="MinorSeventh"></ChordKey>
-      <ChordKey baseNoteName="E" chordName="MinorSeventh"></ChordKey>
-      <ChordKey baseNoteName="F" chordName="MajorSeventh"></ChordKey>
-      <ChordKey baseNoteName="G" chordName="Seventh"></ChordKey>
-      <ChordKey baseNoteName="A" chordName="MinorSeventh"></ChordKey>
-      <ChordKey baseNoteName="B" chordName="MinorSeventhFlatFive"></ChordKey>
+      <ChordKey onKey="a" baseNoteName="C" chordName="MajorSeventh"></ChordKey>
+      <ChordKey onKey="s" baseNoteName="D" chordName="MinorSeventh"></ChordKey>
+      <ChordKey onKey="d" baseNoteName="E" chordName="MinorSeventh"></ChordKey>
+      <ChordKey onKey="f" baseNoteName="F" chordName="MajorSeventh"></ChordKey>
+      <ChordKey onKey="g" baseNoteName="G" chordName="Seventh"></ChordKey>
+      <ChordKey onKey="h" baseNoteName="A" chordName="MinorSeventh"></ChordKey>
+      <ChordKey onKey="j" baseNoteName="B" chordName="MinorSeventhFlatFive"></ChordKey>
     </div>
   </div>
 </template>
