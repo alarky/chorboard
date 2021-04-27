@@ -1,21 +1,31 @@
 <template>
   <div class="chord-key">
-    <div class="chord-key-edit">
+    <div class="chord-key-edit-row">
       <select class="base-note-selector" v-model="state.baseNoteName">
         <option v-for="name in baseNoteNames" :key="name" :value="name">{{ name }}</option>
       </select>
       <select class="chord-selector space-left" v-model="state.chordName">
         <option v-for="(cymbol, name) in chordCymbols" :key="name" :value="name">{{ cymbol }}</option>
       </select>
-      <select class="on-note-selector space-top">
+    </div>
+    <div class="chord-key-edit-row space-top">
+      <select class="on-note-selector">
         <option>\</option>
         <option>E\</option>
         <option>D\</option>
       </select>
-      <button class="rotate space-left">←</button>
-      <button class="rotate space-left">→</button>
+      <div class="rotate space-left">
+        <div class="material-icons material-icons-outlined">
+          rotate_left
+        </div>
+      </div>
+      <div class="rotate space-left">
+        <div class="material-icons material-icons-outlined">
+          rotate_right
+        </div>
+      </div>
     </div>
-    <div class="chord-key-button" :class="{active: state.isOn}"
+    <div class="chord-key-button space-top" :class="{active: state.isOn}"
          @mousedown="on"
          @mouseup="off"
          @mouseout="off"
@@ -38,22 +48,18 @@
   width: 130px;
 }
 
-.chord-key-edit {
-  height: 60px;
+.chord-key-edit-row {
+  height: 24px;
   width: 100%;
+  @apply flex;
+  @apply justify-center;
+  @apply items-center;
 }
 
 select, button {
   @apply rounded-md;
   margin: 0;
   padding: 0 0 0 0.7em;
-}
-
-button {
-  box-shadow: none;
-  @apply border-solid;
-  @apply border;
-  @apply border-gray-400;
 }
 
 .base-note-selector {
@@ -78,7 +84,23 @@ button {
 
 .rotate {
   width: 40px;
+  height: 24px;
+  @apply text-gray-500;
+  @apply border;
+  @apply border-gray-400;
+  @apply rounded-md;
+  @apply flex;
+  @apply justify-center;
+  @apply items-center;
 }
+
+.rotate > div {
+  margin-top: 2px;
+  margin-left: 2px;
+  font-size: 18px;
+  user-select: none;
+}
+
 
 .chord-key-button {
   @apply rounded-xl;
