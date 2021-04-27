@@ -1,6 +1,5 @@
 <template>
   <div class="chord-board">
-    <h2>Diatonic Triad</h2>
     <div class="keys">
       <ChordKey baseNoteName="C" chordName="Major"></ChordKey>
       <ChordKey baseNoteName="D" chordName="Minor"></ChordKey>
@@ -10,7 +9,6 @@
       <ChordKey baseNoteName="A" chordName="Minor"></ChordKey>
       <ChordKey baseNoteName="B" chordName="MinorFlatFive"></ChordKey>
     </div>
-    <h2>Diatonic Tetrad</h2>
     <div class="keys">
       <ChordKey baseNoteName="C" chordName="MajorSeventh"></ChordKey>
       <ChordKey baseNoteName="D" chordName="MinorSeventh"></ChordKey>
@@ -39,8 +37,6 @@
 
 .chord-key {
   margin: 5px;
-  height: 100px;
-  width: 100px;
 }
 
 </style>

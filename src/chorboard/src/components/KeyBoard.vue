@@ -64,14 +64,14 @@
 
 .key {
   margin: 5px;
-  height: 120px;
-  width: 70px;
+  height: 100px;
+  width: 55px;
 }
 
 .spacer {
   margin: 5px;
-  height: 120px;
-  width: 70px;
+  height: 100px;
+  width: 55px;
 }
 
 </style>

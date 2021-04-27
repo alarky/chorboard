@@ -28,8 +28,6 @@ export const ChordTypes: {[name: string]: number[]} = {
 }
 
 export const ChordCymbols: {[name: string]: string} = {
-    None:                  "",
-
     Major:                 "",
     Minor:                 "m",
     MinorFlatFive:         "m(b5)",
