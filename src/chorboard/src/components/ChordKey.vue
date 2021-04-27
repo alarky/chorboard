@@ -21,7 +21,11 @@
          @mouseout="off"
          @mouseenter="mouseEnter"
     >
-      {{ chord }}
+      <div class="on-key">
+        <div>
+          {{ onKey.toUpperCase() }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -81,11 +85,27 @@ button {
   @apply nm-concave-gray-50;
   height: 120px;
   width: 100%;
+  user-select: none;
+  @apply flex;
+  @apply justify-center;
+  @apply items-center;
 }
 
 .chord-key-button.active {
   @apply nm-concave-gray-50;
   @apply light-red;
+}
+
+.on-key {
+  width: 30px;
+  height: 30px;
+  @apply rounded-md;
+  @apply border;
+  @apply border-gray-300;
+  @apply text-gray-400;
+  @apply flex;
+  @apply justify-center;
+  @apply items-center;
 }
 
 

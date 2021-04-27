@@ -31,8 +31,8 @@ export const ChordCymbols: {[name: string]: string} = {
     Major:                 "",
     Minor:                 "m",
     MinorFlatFive:         "m(b5)",
-    SuspendedFour:         "sus4",
-    SuspendedTwo:          "sus2",
+    SusFour:               "sus4",
+    SusTwo:                "sus2",
     Augmented:             "aug",
 
     Seventh:               "7",
