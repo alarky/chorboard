@@ -59,19 +59,19 @@
 }
 
 .black-keys {
-  padding-left: 40px;
+  padding-left: 28px;
 }
 
 .key {
   margin: 5px;
   height: 100px;
-  width: 55px;
+  width: 56px;
 }
 
 .spacer {
   margin: 5px;
   height: 100px;
-  width: 55px;
+  width: 56px;
 }
 
 </style>
