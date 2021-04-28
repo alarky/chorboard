@@ -10,8 +10,14 @@ select {
   @apply px-8;
   @apply py-2;
   @apply rounded-xl;
-  @apply nm-inset-gray-300;
-  border: none;
+  @apply bg-gray-300;
+  @apply border;
+  @apply border-gray-400;
+}
+
+select {
+  appearance: none;
+  background-image: none;
 }
 
 input[type='number'] {
@@ -21,5 +27,7 @@ input[type='number'] {
 button {
   @apply px-8;
   @apply py-2;
-  @apply nm-flat-gray-300;
+  @apply bg-gray-300;
+  @apply border;
+  @apply border-gray-400;
 }
