@@ -84,7 +84,7 @@ export default defineComponent({
     });
 
     const on = () => {
-      const note = new Note(noteNumber.value, 127);
+      const note = new Note(noteNumber.value, 64);
       store.commit('addNote', {v: note});
     };
 
