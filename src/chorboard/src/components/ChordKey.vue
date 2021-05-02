@@ -190,26 +190,23 @@ export default defineComponent({
       return no;
     }
 
+    const chord = new Chord(props.onKey, new Note(baseNoteNumber(), 64));
+    store.commit('addChord', {v: chord});
+
     const on = () => {
       if (state.isOn) return;
       state.isOn = true;
-      const baseNote = new Note(baseNoteNumber(), 64);
-      const chord = new Chord(props.onKey, baseNote);
+      chord.baseNote = new Note(baseNoteNumber(), 64);
       chord.chordType = state.chordName;
-      for (const note of chord.notes) {
-        store.commit('addNote', {v: note});
-      }
+      store.commit('onChord', {v: chord.id});
     }
 
     const off = () => {
       if (!state.isOn) return;
       state.isOn = false;
-      const baseNote = new Note(baseNoteNumber(), 64);
-      const chord = new Chord(props.onKey, baseNote);
+      chord.baseNote = new Note(baseNoteNumber(), 64);
       chord.chordType = state.chordName;
-      for (const note of chord.notes) {
-        store.commit('delNote', {v: note.number});
-      }
+      store.commit('offChord', {v: chord.id});
     }
 
     watch(store.state.keyIsDown, (newValue) => {
@@ -219,10 +216,6 @@ export default defineComponent({
         off();
       }
     }, {deep:true});
-
-    const chord = computed(() => {
-      return `${state.baseNoteName}${ChordCymbols[state.chordName]}`;
-    });
 
     const mouseEnter = () => {
       if (store.state.mouseIsDown) {
@@ -236,7 +229,6 @@ export default defineComponent({
       chordCymbols,
       on,
       off,
-      chord,
       mouseEnter,
     }
   }

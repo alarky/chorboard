@@ -3,12 +3,15 @@ import {createStore, useStore as baseUseStore, Store} from 'vuex'
 import MidiIO from "@/model/midiio";
 import Note from "@/model/note";
 import Synthesizer from "@/model/synthesizer";
+import Chord from "@/model/chord";
 
 export interface State {
   mouseIsDown: boolean
   keyIsDown: {[name: string]: boolean}
   activeOctave: number
   activeNotes: {[name: number]: Note}
+  chords: {[name: string]: Chord}
+  activeChords: {[name: string]: Chord}
 }
 
 export const key: InjectionKey<Store<State>> = Symbol();
@@ -19,6 +22,8 @@ export const store = createStore<State>({
     keyIsDown: {},
     activeOctave: 4,
     activeNotes: {},
+    chords: {},
+    activeChords: {},
   },
   mutations: {
     mouseIsDown(state, {v}) {
@@ -35,10 +40,33 @@ export const store = createStore<State>({
     },
     addNote(state, {v}) {
       state.activeNotes[v.number] = v;
-      Synthesizer.update(state.activeNotes);
+      // Synthesizer.update(state.activeNotes);
     },
     delNote(state, {v}) {
       delete state.activeNotes[v];
+      // Synthesizer.update(state.activeNotes);
+    },
+    addChord(state, {v}) {
+      state.chords[v.id] = v;
+    },
+    onChord(state, {v}) {
+      state.activeChords[v] = state.chords[v];
+      state.activeNotes = {};
+      for (const cid of Object.keys(state.activeChords)) {
+        for (const note of state.activeChords[cid].notes) {
+          state.activeNotes[note.number] = note;
+        }
+      }
+      Synthesizer.update(state.activeNotes);
+    },
+    offChord(state, {v}) {
+      delete state.activeChords[v];
+      state.activeNotes = {};
+      for (const cid of Object.keys(state.activeChords)) {
+        for (const note of state.activeChords[cid].notes) {
+          state.activeNotes[note.number] = note;
+        }
+      }
       Synthesizer.update(state.activeNotes);
     },
   },

@@ -53,8 +53,8 @@ export const ChordCymbols: {[name: string]: string} = {
 }
 
 export default class Chord {
-    private id: string;
-    private baseNote: Note;
+    public id: string;
+    public baseNote: Note;
     public chordType: string;
 
     public get notes(): Note[] {
