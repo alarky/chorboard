@@ -194,7 +194,8 @@ export default defineComponent({
       if (state.isOn) return;
       state.isOn = true;
       const baseNote = new Note(baseNoteNumber(), 64);
-      const chord = new Chord(baseNote, ChordTypes[state.chordName]);
+      const chord = new Chord(props.onKey, baseNote);
+      chord.chordType = state.chordName;
       for (const note of chord.notes) {
         store.commit('addNote', {v: note});
       }
@@ -204,7 +205,8 @@ export default defineComponent({
       if (!state.isOn) return;
       state.isOn = false;
       const baseNote = new Note(baseNoteNumber(), 64);
-      const chord = new Chord(baseNote, ChordTypes[state.chordName]);
+      const chord = new Chord(props.onKey, baseNote);
+      chord.chordType = state.chordName;
       for (const note of chord.notes) {
         store.commit('delNote', {v: note.number});
       }

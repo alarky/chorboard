@@ -53,11 +53,20 @@ export const ChordCymbols: {[name: string]: string} = {
 }
 
 export default class Chord {
+    private id: string;
     private baseNote: Note;
-    public notes: Note[];
+    public chordType: string;
 
-    constructor(baseNote: Note, chord: number[]) {
-        this.baseNote = baseNote;
-        this.notes = chord.map(n => new Note(baseNote.number + n, baseNote.velocity));
+    public get notes(): Note[] {
+        const chord = ChordTypes[this.chordType].slice();
+        const notes = chord.map(n => new Note(this.baseNote.number + n, this.baseNote.velocity));
+        return notes;
     }
+
+    constructor(id: string, baseNote: Note) {
+        this.id = id;
+        this.baseNote = baseNote;
+        this.chordType = "";
+    }
+
 }
