@@ -1,10 +1,10 @@
 <template>
   <div class="chord-key">
     <div class="chord-key-edit-row">
-      <select class="base-note-selector" v-model="state.baseNoteName">
-        <option v-for="name in baseNoteNames" :key="name" :value="name">{{ name }}</option>
+      <select class="base-note-selector" v-model="baseNote">
+        <option v-for="name in noteNames" :key="name" :value="name">{{ name }}</option>
       </select>
-      <select class="chord-selector space-left" v-model="state.chordName">
+      <select class="chord-selector space-left" v-model="chordType">
         <option v-for="(cymbol, name) in chordCymbols" :key="name" :value="name">{{ cymbol }}</option>
       </select>
     </div>
@@ -135,14 +135,12 @@ select, button {
 </style>
 
 <script lang="ts">
-import {computed, reactive, defineComponent, watch} from 'vue';
+import {computed, reactive, defineComponent, watch, toRefs} from 'vue';
 import { useStore } from '@/store';
 import Note, {NoteNameMap} from "@/model/note";
 import Chord, {ChordCymbols, ChordTypes} from "@/model/chord";
 
 interface State {
-  baseNoteName: string
-  chordName: string
   isOn: boolean
 }
 
@@ -166,12 +164,10 @@ export default defineComponent({
     const store = useStore();
 
     const state = reactive<State>({
-      baseNoteName: props.baseNoteName,
-      chordName: props.chordName,
       isOn: false,
     });
 
-    const baseNoteNames = computed(() => {
+    const noteNames = computed(() => {
       return Object.values(NoteNameMap).reverse();
     });
 
@@ -179,34 +175,46 @@ export default defineComponent({
       return ChordCymbols;
     })
 
-    const baseNoteNumber = () => {
+    const noteNumber = (noteName: string) => {
       let no = store.state.activeOctave * 12;
       for (const key in NoteNameMap) {
         const noteNumber = Number(key);
-        if (NoteNameMap[noteNumber] == state.baseNoteName) {
-          no += noteNumber;
+        if (NoteNameMap[noteNumber] == noteName) {
+          return no + noteNumber;
         }
       }
-      return no;
+      return 0;
     }
 
-    const chord = new Chord(props.onKey, new Note(baseNoteNumber(), 64));
-    store.commit('addChord', {v: chord});
+    const _chord = new Chord(props.onKey, new Note(noteNumber(props.baseNoteName), 64), props.chordName);
+    store.commit('addChord', {v: _chord});
+
+    const chord = computed(() => store.state.chords[props.onKey])
+
+    const baseNote = computed({
+      get: () => chord.value.baseNote.name,
+      set: (v: string) => {
+        store.commit('setChordBaseNote', {id: chord.value.id, 'v': new Note(noteNumber(v), 64)})
+      }
+    })
+
+    const chordType = computed( {
+      get: () => chord.value.chordType,
+      set: (v: string) => {
+        store.commit('setChordType', {id: chord.value.id, 'v': v})
+      }
+    })
 
     const on = () => {
       if (state.isOn) return;
       state.isOn = true;
-      chord.baseNote = new Note(baseNoteNumber(), 64);
-      chord.chordType = state.chordName;
-      store.commit('onChord', {v: chord.id});
+      store.commit('onChord', {v: chord.value.id});
     }
 
     const off = () => {
       if (!state.isOn) return;
       state.isOn = false;
-      chord.baseNote = new Note(baseNoteNumber(), 64);
-      chord.chordType = state.chordName;
-      store.commit('offChord', {v: chord.id});
+      store.commit('offChord', {v: chord.value.id});
     }
 
     watch(store.state.keyIsDown, (newValue) => {
@@ -225,8 +233,11 @@ export default defineComponent({
 
     return {
       state,
-      baseNoteNames,
+      noteNames,
       chordCymbols,
+      chord,
+      baseNote,
+      chordType,
       on,
       off,
       mouseEnter,

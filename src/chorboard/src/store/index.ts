@@ -49,6 +49,12 @@ export const store = createStore<State>({
     addChord(state, {v}) {
       state.chords[v.id] = v;
     },
+    setChordBaseNote(state, {id, v}) {
+      state.chords[id].baseNote = v;
+    },
+    setChordType(state, {id, v}) {
+      state.chords[id].chordType = v;
+    },
     onChord(state, {v}) {
       state.activeChords[v] = state.chords[v];
       state.activeNotes = {};

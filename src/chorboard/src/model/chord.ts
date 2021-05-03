@@ -56,6 +56,7 @@ export default class Chord {
     public id: string;
     public baseNote: Note;
     public chordType: string;
+    public rotate: number;
 
     public get notes(): Note[] {
         const chord = ChordTypes[this.chordType].slice();
@@ -63,10 +64,10 @@ export default class Chord {
         return notes;
     }
 
-    constructor(id: string, baseNote: Note) {
+    constructor(id: string, baseNote: Note, chordType: string) {
         this.id = id;
         this.baseNote = baseNote;
-        this.chordType = "";
+        this.chordType = chordType;
+        this.rotate = 0;
     }
-
 }
