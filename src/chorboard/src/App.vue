@@ -3,9 +3,11 @@
     <div class="view-container">
       <router-view />
     </div>
+    <!--
     <div>
       <pre>{{ state }}</pre>
     </div>
+    -->
   </div>
 </template>
 
