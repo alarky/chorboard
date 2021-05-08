@@ -84,7 +84,7 @@ export default class Chord {
         this.rotation = 0;
     }
 
-    public rotate(v: number) {
+    public rotate(v: number): void {
         this.rotation += v;
     }
 }

@@ -10,9 +10,7 @@
     </div>
     <div class="chord-key-edit-row space-top">
       <select class="on-note-selector">
-        <option>\</option>
-        <option>E\</option>
-        <option>D\</option>
+        <option v-if="rootNoteName">/{{ rootNoteName }}</option>
       </select>
       <div @click="rotate(-1)" class="rotate space-left">
         <div class="material-icons material-icons-outlined">
@@ -25,7 +23,7 @@
         </div>
       </div>
     </div>
-    <div class="chord-key-button space-top" :class="{active: state.isOn}"
+    <div class="chord-key-button" :class="{active: state.isOn}"
          @mousedown="on"
          @mouseup="off"
          @mouseout="off"
@@ -107,6 +105,7 @@ select, button {
   @apply nm-concave-gray-50;
   height: 120px;
   width: 100%;
+  margin-top: 7px;
   user-select: none;
   @apply flex;
   @apply justify-center;
@@ -205,6 +204,14 @@ export default defineComponent({
       }
     })
 
+    const rootNoteName = computed(() => {
+      if (chord.value.rotation == 0) {
+        return "";
+      }
+      const noteNumber = chord.value.notes[0].number % 12;
+      return NoteNameMap[noteNumber];
+    })
+
     const on = () => {
       if (state.isOn) return;
       state.isOn = true;
@@ -242,6 +249,7 @@ export default defineComponent({
       chord,
       baseNote,
       chordType,
+      rootNoteName,
       rotate,
       on,
       off,
