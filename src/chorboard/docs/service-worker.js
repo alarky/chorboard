@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.45c149e775d7534ad10051c724d76291.js"
+  "/precache-manifest.4d0b9a160cae3c151818a772a039d67a.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "chorboard"});

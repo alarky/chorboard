@@ -15,6 +15,7 @@ class midiIO {
         this.noteOnHandler = (n, v) => {console.log(n, v)};
         this.noteOffHandler = (n, v) => {console.log(n, v)};
 
+        /* TODO
         navigator.requestMIDIAccess({sysex: true}).then((midiAccess: MIDIAccess) => {
             const inputIterator = midiAccess.inputs.values();
             const outputIterator = midiAccess.outputs.values();
@@ -49,6 +50,7 @@ class midiIO {
         }, (err) => {
             console.log(err);
         });
+         */
     }
 }
 
