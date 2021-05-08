@@ -1,6 +1,6 @@
 <template>
   <div class="app" @mousedown="mouseDown" @mouseup="mouseUp" @mouseleave="mouseUp">
-    <div class="container mx-auto py-4">
+    <div class="view-container">
       <router-view />
     </div>
     <div>
@@ -14,6 +14,12 @@
   @apply min-h-screen;
   @apply bg-gray-300;
   @apply text-gray-600;
+}
+
+.view-container {
+  @apply mx-auto;
+  @apply py-4;
+  width: 1030px;
 }
 
 </style>
