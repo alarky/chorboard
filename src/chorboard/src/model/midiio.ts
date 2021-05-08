@@ -1,6 +1,6 @@
 import MIDIInput = WebMidi.MIDIInput;
 import MIDIOutput = WebMidi.MIDIOutput;
-import MIDIAccess = WebMidi.MIDIAccess;
+//import MIDIAccess = WebMidi.MIDIAccess;
 
 class midiIO {
     private inputs!: MIDIInput[];
