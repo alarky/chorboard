@@ -1,12 +1,14 @@
 <template>
   <div>
     <div class="header">
-      <h1>ChorBoard</h1>
+      <div class="title">
+        <h1>ChorBoard</h1>&nbsp;beta
+      </div>
+      <div class="controls">
+        <ActiveOctave></ActiveOctave>
+      </div>
     </div>
 
-    <div class="controls">
-      <ActiveOctave></ActiveOctave>
-    </div>
 
     <ChordBoard></ChordBoard>
 
@@ -19,7 +21,13 @@
 .header {
   @apply flex;
   @apply flex-row;
+  @apply justify-between;
   @apply mb-4;
+}
+
+.title {
+  @apply flex;
+  @apply flex-row;
 
   h1 {
     @apply text-4xl;
