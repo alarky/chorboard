@@ -55,6 +55,9 @@ export const store = createStore<State>({
     setChordType(state, {id, v}) {
       state.chords[id].chordType = v;
     },
+    rotateChord(state, {id, v}) {
+      state.chords[id].rotate(v);
+    },
     onChord(state, {v}) {
       state.activeChords[v] = state.chords[v];
       state.activeNotes = {};

@@ -56,10 +56,23 @@ export default class Chord {
     public id: string;
     public baseNote: Note;
     public chordType: string;
-    public rotate: number;
+    public rotation: number;
 
     public get notes(): Note[] {
         const chord = ChordTypes[this.chordType].slice();
+
+        if (this.rotation > 0) {
+            for (let i = 0; i < this.rotation; i++) {
+                const v = chord.shift() || 0;
+                chord.push(v + 12);
+            }
+        } else if (this.rotation < 0) {
+            for (let i = 0; i < -this.rotation; i++) {
+                const v = chord.pop() || 0;
+                chord.unshift(v - 12);
+            }
+        }
+
         const notes = chord.map(n => new Note(this.baseNote.number + n, this.baseNote.velocity));
         return notes;
     }
@@ -68,6 +81,10 @@ export default class Chord {
         this.id = id;
         this.baseNote = baseNote;
         this.chordType = chordType;
-        this.rotate = 0;
+        this.rotation = 0;
+    }
+
+    public rotate(v: number) {
+        this.rotation += v;
     }
 }

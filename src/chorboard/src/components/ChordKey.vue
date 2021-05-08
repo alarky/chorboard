@@ -14,12 +14,12 @@
         <option>E\</option>
         <option>D\</option>
       </select>
-      <div class="rotate space-left">
+      <div @click="rotate(-1)" class="rotate space-left">
         <div class="material-icons material-icons-outlined">
           rotate_left
         </div>
       </div>
-      <div class="rotate space-left">
+      <div @click="rotate(1)" class="rotate space-left">
         <div class="material-icons material-icons-outlined">
           rotate_right
         </div>
@@ -217,6 +217,10 @@ export default defineComponent({
       store.commit('offChord', {v: chord.value.id});
     }
 
+    const rotate = (v: number) => {
+      store.commit('rotateChord', {id: chord.value.id, 'v': v});
+    }
+
     watch(store.state.keyIsDown, (newValue) => {
       if (newValue[props.onKey]) {
         on();
@@ -238,6 +242,7 @@ export default defineComponent({
       chord,
       baseNote,
       chordType,
+      rotate,
       on,
       off,
       mouseEnter,
