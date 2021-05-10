@@ -3,11 +3,12 @@
     <div class="view-container">
       <router-view />
     </div>
-    <!--
     <div>
+      <ul v-if="state.midiIO">
+        <li v-for="output in state.midiIO.outputs" :key="output.id">{{ output.name }}</li>
+      </ul>
       <pre>{{ state }}</pre>
     </div>
-    -->
   </div>
 </template>
 
@@ -52,6 +53,8 @@ export default defineComponent({
     window.addEventListener('keyup', (e: any) => {
       store.commit('keyUp', {v: e.key});
     });
+
+    store.dispatch('initMidiIO');
 
     return {
       state: store.state,

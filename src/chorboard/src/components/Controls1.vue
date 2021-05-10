@@ -1,16 +1,23 @@
 <template>
-  <div class="active-octave">
-    <div class="label-container">
-      <label for="active-octave-input">OCTAVE</label>
-    </div>
-    <div>
-      <input type="number" id="active-octave-input" v-model="activeOctave" min="0" max="9">
+  <div class="controls">
+    <div class="control">
+      <div class="label-container">
+        <label for="active-octave-input">OCTAVE</label>
+      </div>
+      <div>
+        <input type="number" id="active-octave-input" v-model="activeOctave" min="0" max="9">
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.active-octave {
+.controls {
+  @apply flex;
+  @apply flex-row;
+}
+
+.control {
   @apply flex;
   @apply flex-col;
 }
@@ -32,7 +39,7 @@ import { defineComponent, computed } from 'vue';
 import {useStore} from "@/store";
 
 export default defineComponent({
-  name: 'ActiveOctave',
+  name: 'Controls1',
   setup() {
     const store = useStore();
 

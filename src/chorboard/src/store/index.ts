@@ -1,11 +1,12 @@
 import {InjectionKey} from "vue";
 import {createStore, useStore as baseUseStore, Store} from 'vuex'
-import MidiIO from "@/model/midiio";
+import MidiIO, { midiIO } from "@/model/midiio";
 import Note from "@/model/note";
 import Synthesizer from "@/model/synthesizer";
 import Chord from "@/model/chord";
 
 export interface State {
+  midiIO?: midiIO
   mouseIsDown: boolean
   keyIsDown: {[name: string]: boolean}
   activeOctave: number
@@ -18,6 +19,7 @@ export const key: InjectionKey<Store<State>> = Symbol();
 
 export const store = createStore<State>({
   state: {
+    midiIO: undefined,
     mouseIsDown: false,
     keyIsDown: {},
     activeOctave: 4,
@@ -26,6 +28,9 @@ export const store = createStore<State>({
     activeChords: {},
   },
   mutations: {
+    setMidiIO(state, {v}) {
+      state.midiIO = v;
+    },
     mouseIsDown(state, {v}) {
       state.mouseIsDown = v;
     },
@@ -80,6 +85,11 @@ export const store = createStore<State>({
     },
   },
   actions: {
+    initMidiIO(context) {
+      MidiIO.initialize().then(() => {
+        context.commit('setMidiIO', {v: MidiIO});
+      });
+    },
   },
   modules: {
   }

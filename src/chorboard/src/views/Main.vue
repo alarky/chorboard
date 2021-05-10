@@ -4,11 +4,10 @@
       <div class="title">
         <h1>ChorBoard</h1>&nbsp;beta
       </div>
-      <div class="controls">
-        <ActiveOctave></ActiveOctave>
-      </div>
-    </div>
 
+      <Controls1></Controls1>
+
+    </div>
 
     <ChordBoard></ChordBoard>
 
@@ -36,8 +35,6 @@
 }
 
 .controls {
-  @apply flex;
-  @apply flex-row;
   @apply mb-4;
 }
 </style>
@@ -46,15 +43,15 @@
 import {computed, defineComponent} from 'vue';
 import { useStore } from '@/store';
 import KeyBoard from "@/components/KeyBoard.vue";
-import ActiveOctave from "@/components/ActiveOctave.vue";
 import ChordBoard from "@/components/ChordBoard.vue";
+import Controls1 from "@/components/Controls1.vue";
 
 export default defineComponent({
   name: 'Main',
   components: {
+    Controls1,
     ChordBoard,
     KeyBoard,
-    ActiveOctave,
   },
   setup() {
     const store = useStore();

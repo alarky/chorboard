@@ -1,10 +1,10 @@
 import MIDIInput = WebMidi.MIDIInput;
 import MIDIOutput = WebMidi.MIDIOutput;
-//import MIDIAccess = WebMidi.MIDIAccess;
+import MIDIAccess = WebMidi.MIDIAccess;
 
-class midiIO {
-    private inputs!: MIDIInput[];
-    private outputs!: MIDIOutput[];
+export class midiIO {
+    public inputs!: MIDIInput[];
+    public outputs!: MIDIOutput[];
 
     public noteOnHandler!: (noteNumber: number, velocity: number) => void;
     public noteOffHandler!: (noteNumber: number, velocity: number) => void;
@@ -12,11 +12,16 @@ class midiIO {
     constructor() {
         this.inputs = [];
         this.outputs = [];
-        this.noteOnHandler = (n, v) => {console.log(n, v)};
-        this.noteOffHandler = (n, v) => {console.log(n, v)};
+        this.noteOnHandler = (n, v) => {
+            console.log(n, v)
+        };
+        this.noteOffHandler = (n, v) => {
+            console.log(n, v)
+        };
+    }
 
-        /* TODO
-        navigator.requestMIDIAccess({sysex: true}).then((midiAccess: MIDIAccess) => {
+    public async initialize(): Promise<void> {
+        return navigator.requestMIDIAccess({sysex: true}).then((midiAccess: MIDIAccess) => {
             const inputIterator = midiAccess.inputs.values();
             const outputIterator = midiAccess.outputs.values();
 
@@ -32,6 +37,7 @@ class midiIO {
                 o = outputIterator.next();
             }
 
+            /* TODO
             for (const input of this.inputs) {
                 input.onmidimessage = (e) => {
                     switch (e.data[0] & 0xf0) {
@@ -47,10 +53,10 @@ class midiIO {
                     }
                 }
             }
+             */
         }, (err) => {
             console.log(err);
         });
-         */
     }
 }
 
