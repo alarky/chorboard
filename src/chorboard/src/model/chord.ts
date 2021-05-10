@@ -2,6 +2,8 @@ import Note from "@/model/note";
 
 export const ChordTypes: {[name: string]: number[]} = {
     None:                  [0],
+    Power2:                [0, 7],
+    Power3:                [0, 7, 12],
 
     Major:                 [0, 4, 7],
     Minor:                 [0, 3, 7],
@@ -28,7 +30,11 @@ export const ChordTypes: {[name: string]: number[]} = {
 }
 
 export const ChordCymbols: {[name: string]: string} = {
-    Major:                 "",
+    None:                  "",
+    Power2:                "Power2",
+    Power3:                "Power3",
+
+    Major:                 "M",
     Minor:                 "m",
     MinorFlatFive:         "m(b5)",
     SusFour:               "sus4",
