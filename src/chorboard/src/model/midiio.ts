@@ -83,7 +83,7 @@ export class midiIO {
             const midi1 = 0x90 + this.activeOutputChannel - 1;
             if (!this.activeNotes[note.number]) {
                 const midi2 = note.number;
-                const midi3 = 127;
+                const midi3 = note.velocity;
                 midiOutput.send([midi1, midi2, midi3]);
             }
         }

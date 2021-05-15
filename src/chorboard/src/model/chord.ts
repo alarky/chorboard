@@ -64,6 +64,7 @@ export default class Chord {
     public chordType: string;
     public rotation: number;
     public isOn: boolean;
+    public velocity: number;
 
     public get notes(): Note[] {
         const chord = ChordTypes[this.chordType].slice();
@@ -80,7 +81,7 @@ export default class Chord {
             }
         }
 
-        const notes = chord.map(n => new Note(this.baseNote.number + n, this.baseNote.velocity));
+        const notes = chord.map(n => new Note(this.baseNote.number + n, this.velocity));
         return notes;
     }
 
@@ -90,6 +91,7 @@ export default class Chord {
         this.chordType = chordType;
         this.rotation = 0;
         this.isOn = false;
+        this.velocity = 127;
     }
 
     public rotate(v: number): void {

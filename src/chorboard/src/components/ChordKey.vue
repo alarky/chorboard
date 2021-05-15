@@ -177,7 +177,7 @@ export default defineComponent({
       return 0;
     }
 
-    const _chord = new Chord(props.onKey, new Note(noteNumber(props.baseNoteName), 64), props.chordName);
+    const _chord = new Chord(props.onKey, new Note(noteNumber(props.baseNoteName), 127), props.chordName);
     store.commit('addChord', {v: _chord});
 
     const chord = computed(() => store.state.chords[props.onKey])
@@ -185,7 +185,7 @@ export default defineComponent({
     const baseNote = computed({
       get: () => chord.value.baseNote.name,
       set: (v: string) => {
-        store.commit('setChordBaseNote', {id: chord.value.id, 'v': new Note(noteNumber(v), 64)})
+        store.commit('setChordBaseNote', {id: chord.value.id, 'v': new Note(noteNumber(v), 127)})
       }
     })
 
@@ -205,11 +205,11 @@ export default defineComponent({
     })
 
     const on = () => {
-      store.commit('onChord', {v: chord.value.id});
+      store.commit('onChord', {id: chord.value.id, velocity: 127});
     }
 
     const off = () => {
-      store.commit('offChord', {v: chord.value.id});
+      store.commit('offChord', {id: chord.value.id, velocity: 127});
     }
 
     const rotate = (v: number) => {

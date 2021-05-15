@@ -72,10 +72,11 @@ export const store = createStore<State>({
     rotateChord(state, {id, v}) {
       state.chords[id].rotate(v);
     },
-    onChord(state, {v}) {
-      if (state.chords[v].isOn) return;
-      state.chords[v].isOn = true;
-      state.activeChords[v] = state.chords[v];
+    onChord(state, {id, velocity}) {
+      if (state.chords[id].isOn) return;
+      state.chords[id].isOn = true;
+      state.chords[id].velocity = velocity;
+      state.activeChords[id] = state.chords[id];
       state.activeNotes = {};
       for (const cid of Object.keys(state.activeChords)) {
         for (const note of state.activeChords[cid].notes) {
@@ -88,10 +89,11 @@ export const store = createStore<State>({
         Synthesizer.update(state.activeNotes);
       }
     },
-    offChord(state, {v}) {
-      if (!state.chords[v].isOn) return;
-      state.chords[v].isOn = false;
-      delete state.activeChords[v];
+    offChord(state, {id}) {
+      if (!state.chords[id].isOn) return;
+      state.chords[id].isOn = false;
+      state.chords[id].velocity = 0;
+      delete state.activeChords[id];
       state.activeNotes = {};
       for (const cid of Object.keys(state.activeChords)) {
         for (const note of state.activeChords[cid].notes) {
@@ -117,52 +119,51 @@ export const store = createStore<State>({
 });
 
 MidiIO.noteOnHandler = (noteNumber, velocity) => {
-  console.log(`noteOn: ${noteNumber}: ${velocity}`);
   switch(noteNumber) {
     case 36:
-      store.commit("onChord", {v: "a"});
+      store.commit("onChord", {id: "a", velocity: velocity});
       break;
     case 37:
-      store.commit("onChord", {v: "s"});
+      store.commit("onChord", {id: "s", velocity: velocity});
       break;
     case 38:
-      store.commit("onChord", {v: "d"});
+      store.commit("onChord", {id: "d", velocity: velocity});
       break;
     case 39:
-      store.commit("onChord", {v: "f"});
+      store.commit("onChord", {id: "f", velocity: velocity});
       break;
     case 40:
-      store.commit("onChord", {v: "g"});
+      store.commit("onChord", {id: "g", velocity: velocity});
       break;
     case 41:
-      store.commit("onChord", {v: "h"});
+      store.commit("onChord", {id: "h", velocity: velocity});
       break;
     case 42:
-      store.commit("onChord", {v: "j"});
+      store.commit("onChord", {id: "j", velocity: velocity});
       break;
     case 43:
       // blank
       break;
     case 44:
-      store.commit("onChord", {v: "q"});
+      store.commit("onChord", {id: "q", velocity: velocity});
       break;
     case 45:
-      store.commit("onChord", {v: "w"});
+      store.commit("onChord", {id: "w", velocity: velocity});
       break;
     case 46:
-      store.commit("onChord", {v: "e"});
+      store.commit("onChord", {id: "e", velocity: velocity});
       break;
     case 47:
-      store.commit("onChord", {v: "r"});
+      store.commit("onChord", {id: "r", velocity: velocity});
       break;
     case 48:
-      store.commit("onChord", {v: "t"});
+      store.commit("onChord", {id: "t", velocity: velocity});
       break;
     case 49:
-      store.commit("onChord", {v: "y"});
+      store.commit("onChord", {id: "y", velocity: velocity});
       break;
     case 50:
-      store.commit("onChord", {v: "u"});
+      store.commit("onChord", {id: "u", velocity: velocity});
       break;
     case 51:
       // blank
@@ -171,52 +172,51 @@ MidiIO.noteOnHandler = (noteNumber, velocity) => {
 };
 
 MidiIO.noteOffHandler = (noteNumber, velocity) => {
-  console.log(`noteOff: ${noteNumber}: ${velocity}`);
   switch(noteNumber) {
     case 36:
-      store.commit("offChord", {v: "a"});
+      store.commit("offChord", {id: "a", velocity: velocity});
       break;
     case 37:
-      store.commit("offChord", {v: "s"});
+      store.commit("offChord", {id: "s", velocity: velocity});
       break;
     case 38:
-      store.commit("offChord", {v: "d"});
+      store.commit("offChord", {id: "d", velocity: velocity});
       break;
     case 39:
-      store.commit("offChord", {v: "f"});
+      store.commit("offChord", {id: "f", velocity: velocity});
       break;
     case 40:
-      store.commit("offChord", {v: "g"});
+      store.commit("offChord", {id: "g", velocity: velocity});
       break;
     case 41:
-      store.commit("offChord", {v: "h"});
+      store.commit("offChord", {id: "h", velocity: velocity});
       break;
     case 42:
-      store.commit("offChord", {v: "j"});
+      store.commit("offChord", {id: "j", velocity: velocity});
       break;
     case 43:
       // blank
       break;
     case 44:
-      store.commit("offChord", {v: "q"});
+      store.commit("offChord", {id: "q", velocity: velocity});
       break;
     case 45:
-      store.commit("offChord", {v: "w"});
+      store.commit("offChord", {id: "w", velocity: velocity});
       break;
     case 46:
-      store.commit("offChord", {v: "e"});
+      store.commit("offChord", {id: "e", velocity: velocity});
       break;
     case 47:
-      store.commit("offChord", {v: "r"});
+      store.commit("offChord", {id: "r", velocity: velocity});
       break;
     case 48:
-      store.commit("offChord", {v: "t"});
+      store.commit("offChord", {id: "t", velocity: velocity});
       break;
     case 49:
-      store.commit("offChord", {v: "y"});
+      store.commit("offChord", {id: "y", velocity: velocity});
       break;
     case 50:
-      store.commit("offChord", {v: "u"});
+      store.commit("offChord", {id: "u", velocity: velocity});
       break;
     case 51:
       // blank

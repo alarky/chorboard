@@ -16,11 +16,11 @@ export const NoteNameMap: {[name: number]: string} = {
 
 
 export default class Note {
-    public readonly number: number = 0;
-    public readonly velocity: number = 0;
-    public readonly name: string = "";
-    public readonly octave: number = 0;
-    public readonly isAuto: boolean = false;
+    public number = 0;
+    public velocity = 0;
+    public name = "";
+    public octave = 0;
+    public isAuto = false;
 
     constructor(number: number, velocity = 0, isAuto = false) {
         this.number = number;
