@@ -73,6 +73,8 @@ export const store = createStore<State>({
       state.chords[id].rotate(v);
     },
     onChord(state, {v}) {
+      if (state.chords[v].isOn) return;
+      state.chords[v].isOn = true;
       state.activeChords[v] = state.chords[v];
       state.activeNotes = {};
       for (const cid of Object.keys(state.activeChords)) {
@@ -87,6 +89,8 @@ export const store = createStore<State>({
       }
     },
     offChord(state, {v}) {
+      if (!state.chords[v].isOn) return;
+      state.chords[v].isOn = false;
       delete state.activeChords[v];
       state.activeNotes = {};
       for (const cid of Object.keys(state.activeChords)) {

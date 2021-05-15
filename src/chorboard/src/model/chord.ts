@@ -63,6 +63,7 @@ export default class Chord {
     public baseNote: Note;
     public chordType: string;
     public rotation: number;
+    public isOn: boolean;
 
     public get notes(): Note[] {
         const chord = ChordTypes[this.chordType].slice();
@@ -88,6 +89,7 @@ export default class Chord {
         this.baseNote = baseNote;
         this.chordType = chordType;
         this.rotation = 0;
+        this.isOn = false;
     }
 
     public rotate(v: number): void {

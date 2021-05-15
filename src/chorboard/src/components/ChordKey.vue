@@ -23,7 +23,7 @@
         </div>
       </div>
     </div>
-    <div class="chord-key-button" :class="{active: state.isOn}"
+    <div class="chord-key-button" :class="{active: chord.isOn}"
          @mousedown="on"
          @mouseup="off"
          @mouseout="off"
@@ -139,10 +139,6 @@ import { useStore } from '@/store';
 import Note, {NoteNameMap} from "@/model/note";
 import Chord, {ChordCymbols, ChordTypes} from "@/model/chord";
 
-interface State {
-  isOn: boolean
-}
-
 export default defineComponent({
   name: 'ChordKey',
   props: {
@@ -161,10 +157,6 @@ export default defineComponent({
   },
   setup(props) {
     const store = useStore();
-
-    const state = reactive<State>({
-      isOn: false,
-    });
 
     const noteNames = computed(() => {
       return Object.values(NoteNameMap).reverse();
@@ -213,14 +205,10 @@ export default defineComponent({
     })
 
     const on = () => {
-      if (state.isOn) return;
-      state.isOn = true;
       store.commit('onChord', {v: chord.value.id});
     }
 
     const off = () => {
-      if (!state.isOn) return;
-      state.isOn = false;
       store.commit('offChord', {v: chord.value.id});
     }
 
@@ -243,7 +231,6 @@ export default defineComponent({
     }
 
     return {
-      state,
       noteNames,
       chordCymbols,
       chord,
