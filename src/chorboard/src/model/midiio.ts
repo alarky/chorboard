@@ -6,6 +6,10 @@ export class midiIO {
     public inputs!: MIDIInput[];
     public outputs!: MIDIOutput[];
 
+    public activeInputID!: string;
+    public activeOutputID!: string;
+    public activeOutputChannel!: number;
+
     public noteOnHandler!: (noteNumber: number, velocity: number) => void;
     public noteOffHandler!: (noteNumber: number, velocity: number) => void;
 
