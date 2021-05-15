@@ -105,7 +105,7 @@ export const store = createStore<State>({
   },
   actions: {
     initMidiIO(context) {
-      MidiIO.initialize().then(() => {
+      return MidiIO.initialize().then(() => {
         context.commit('setMidiIO', {v: MidiIO});
       });
     },

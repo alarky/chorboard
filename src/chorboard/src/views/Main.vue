@@ -2,7 +2,7 @@
   <div>
     <div class="header">
       <div class="title">
-        <h1>ChorBoard</h1> &nbsp;&nbsp;v1.0.0
+        <h1>ChorBoard</h1> &nbsp;&nbsp;v0.1.0
       </div>
 
       <Controls1></Controls1>

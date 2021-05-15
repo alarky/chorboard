@@ -59,7 +59,7 @@
 }
 
 .black-keys {
-  padding-left: 28px;
+  padding-left: 31px;
 }
 
 .key {
