@@ -2,7 +2,7 @@
   <div>
     <div class="header">
       <div class="title">
-        <h1>ChorBoard</h1>&nbsp;beta
+        <h1>ChorBoard</h1> &nbsp;&nbsp;v1.0.0
       </div>
 
       <Controls1></Controls1>
@@ -21,12 +21,14 @@
   @apply flex;
   @apply flex-row;
   @apply justify-between;
-  @apply mb-4;
+  @apply items-center;
+  margin-bottom: 2px;
 }
 
 .title {
   @apply flex;
   @apply flex-row;
+  margin-top: -6px;
 
   h1 {
     @apply text-4xl;
