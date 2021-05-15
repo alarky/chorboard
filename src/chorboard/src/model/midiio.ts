@@ -47,9 +47,9 @@ export class midiIO {
                 o = outputIterator.next();
             }
 
-            /* TODO
             for (const input of this.inputs) {
                 input.onmidimessage = (e) => {
+                    if (input.id != this.activeInputID) return;
                     switch (e.data[0] & 0xf0) {
                         case 0x90:
                             this.noteOnHandler(e.data[1], e.data[2]);
@@ -58,12 +58,11 @@ export class midiIO {
                             this.noteOffHandler(e.data[1], e.data[2]);
                             break;
                         default:
-                            console.log("other midi message: ", e.data);
+                            console.log("other midi message: ", e.data[0], e.data[1], e.data[2]);
                             break;
                     }
                 }
             }
-             */
         }, (err) => {
             console.log(err);
         });

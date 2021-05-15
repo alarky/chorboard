@@ -76,7 +76,7 @@ export default defineComponent({
     const activeMidiInput = computed( {
       get: () => store.state.midiIO ? store.state.midiIO.activeInputID || "-" : "-",
       set: (v) => {
-        console.log(v);
+        store.commit('setMidiInput', {v});
       }
     });
 

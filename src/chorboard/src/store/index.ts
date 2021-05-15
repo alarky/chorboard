@@ -31,6 +31,10 @@ export const store = createStore<State>({
     setMidiIO(state, {v}) {
       state.midiIO = v;
     },
+    setMidiInput(state, {v}) {
+      if (!state.midiIO) return;
+      state.midiIO.activeInputID = v;
+    },
     setMidiOutput(state, {id, channel}) {
       if (!state.midiIO) return;
       state.midiIO.activeOutputID = id;
@@ -109,24 +113,111 @@ export const store = createStore<State>({
 });
 
 MidiIO.noteOnHandler = (noteNumber, velocity) => {
-  const octave = (noteNumber - noteNumber % 12) / 12;
-  const octaveDelta = octave - store.state.activeOctave;
-  if (octaveDelta > 2) {
-    store.commit('activeOctave', {v: octave - 2});
-  } else if (octaveDelta < 0) {
-    store.commit('activeOctave', {v: octave});
-  }
-
-  if (velocity > 0) {
-    const note = new Note(noteNumber, velocity);
-    store.commit('addNote', {v: note});
-  } else {
-    store.commit('delNote', {v: noteNumber});
+  console.log(`noteOn: ${noteNumber}: ${velocity}`);
+  switch(noteNumber) {
+    case 36:
+      store.commit("onChord", {v: "a"});
+      break;
+    case 37:
+      store.commit("onChord", {v: "s"});
+      break;
+    case 38:
+      store.commit("onChord", {v: "d"});
+      break;
+    case 39:
+      store.commit("onChord", {v: "f"});
+      break;
+    case 40:
+      store.commit("onChord", {v: "g"});
+      break;
+    case 41:
+      store.commit("onChord", {v: "h"});
+      break;
+    case 42:
+      store.commit("onChord", {v: "j"});
+      break;
+    case 43:
+      // blank
+      break;
+    case 44:
+      store.commit("onChord", {v: "q"});
+      break;
+    case 45:
+      store.commit("onChord", {v: "w"});
+      break;
+    case 46:
+      store.commit("onChord", {v: "e"});
+      break;
+    case 47:
+      store.commit("onChord", {v: "r"});
+      break;
+    case 48:
+      store.commit("onChord", {v: "t"});
+      break;
+    case 49:
+      store.commit("onChord", {v: "y"});
+      break;
+    case 50:
+      store.commit("onChord", {v: "u"});
+      break;
+    case 51:
+      // blank
+      break;
   }
 };
 
 MidiIO.noteOffHandler = (noteNumber, velocity) => {
-  store.commit('delNote', {v: noteNumber});
+  console.log(`noteOff: ${noteNumber}: ${velocity}`);
+  switch(noteNumber) {
+    case 36:
+      store.commit("offChord", {v: "a"});
+      break;
+    case 37:
+      store.commit("offChord", {v: "s"});
+      break;
+    case 38:
+      store.commit("offChord", {v: "d"});
+      break;
+    case 39:
+      store.commit("offChord", {v: "f"});
+      break;
+    case 40:
+      store.commit("offChord", {v: "g"});
+      break;
+    case 41:
+      store.commit("offChord", {v: "h"});
+      break;
+    case 42:
+      store.commit("offChord", {v: "j"});
+      break;
+    case 43:
+      // blank
+      break;
+    case 44:
+      store.commit("offChord", {v: "q"});
+      break;
+    case 45:
+      store.commit("offChord", {v: "w"});
+      break;
+    case 46:
+      store.commit("offChord", {v: "e"});
+      break;
+    case 47:
+      store.commit("offChord", {v: "r"});
+      break;
+    case 48:
+      store.commit("offChord", {v: "t"});
+      break;
+    case 49:
+      store.commit("offChord", {v: "y"});
+      break;
+    case 50:
+      store.commit("offChord", {v: "u"});
+      break;
+    case 51:
+      // blank
+      break;
+  }
 };
 
 
