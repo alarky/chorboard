@@ -44,6 +44,7 @@
 .control {
   @apply flex;
   @apply flex-col;
+  margin-left: 5px;
 }
 
 .label-container {
@@ -52,7 +53,7 @@
   @apply pr-1;
 }
 
-input {
+select, input {
   @apply m-0;
 }
 
