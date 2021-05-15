@@ -31,6 +31,11 @@ export const store = createStore<State>({
     setMidiIO(state, {v}) {
       state.midiIO = v;
     },
+    setMidiOutput(state, {id, channel}) {
+      if (!state.midiIO) return;
+      state.midiIO.activeOutputID = id;
+      state.midiIO.activeOutputChannel = channel;
+    },
     mouseIsDown(state, {v}) {
       state.mouseIsDown = v;
     },
@@ -71,7 +76,11 @@ export const store = createStore<State>({
           state.activeNotes[note.number] = note;
         }
       }
-      Synthesizer.update(state.activeNotes);
+      if (state.midiIO && state.midiIO.activeOutputID) {
+        state.midiIO.output(state.activeNotes);
+      } else {
+        Synthesizer.update(state.activeNotes);
+      }
     },
     offChord(state, {v}) {
       delete state.activeChords[v];
@@ -81,7 +90,11 @@ export const store = createStore<State>({
           state.activeNotes[note.number] = note;
         }
       }
-      Synthesizer.update(state.activeNotes);
+      if (state.midiIO && state.midiIO.activeOutputID) {
+        state.midiIO.output(state.activeNotes);
+      } else {
+        Synthesizer.update(state.activeNotes);
+      }
     },
   },
   actions: {

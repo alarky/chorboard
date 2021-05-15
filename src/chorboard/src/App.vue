@@ -5,7 +5,7 @@
     </div>
     <div>
       <ul v-if="state.midiIO">
-        <li v-for="output in state.midiIO.outputs" :key="output.id">{{ output.name }}</li>
+        <li v-for="output in state.midiIO.outputs" :key="output.id">{{ output.id }}: {{ output.name }}</li>
       </ul>
       <pre>{{ state }}</pre>
     </div>

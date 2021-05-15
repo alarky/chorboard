@@ -85,10 +85,10 @@ export default defineComponent({
         return `${store.state.midiIO.activeOutputID}:${store.state.midiIO.activeOutputChannel}`
       },
       set: (v) => {
-        console.log(v);
+        const vs = v.split(":");
+        store.commit('setMidiOutput', {id: vs[0], channel: Number(vs[1])});
       }
     });
-
 
     const activeOctave = computed({
       get: () => store.state.activeOctave,
