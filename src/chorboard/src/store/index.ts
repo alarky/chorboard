@@ -56,14 +56,6 @@ export const store = createStore<State>({
         state.chords[id].baseNote.number += offset;
       }
     },
-    addNote(state, {v}) {
-      state.activeNotes[v.number] = v;
-      // Synthesizer.update(state.activeNotes);
-    },
-    delNote(state, {v}) {
-      delete state.activeNotes[v];
-      // Synthesizer.update(state.activeNotes);
-    },
     addChord(state, {v}) {
       state.chords[v.id] = v;
     },

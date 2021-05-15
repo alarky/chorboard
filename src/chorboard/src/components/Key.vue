@@ -5,10 +5,6 @@
     active: isActive,
     auto: isAuto,
     }"
-       @mousedown="on"
-       @mouseup="off"
-       @mouseout="off"
-       @mouseenter="mouseEnter"
   >
   </div>
 </template>
@@ -83,21 +79,6 @@ export default defineComponent({
       return note.isAuto;
     });
 
-    const on = () => {
-      const note = new Note(noteNumber.value, 64);
-      store.commit('addNote', {v: note});
-    };
-
-    const off = () => {
-      store.commit('delNote', {v: noteNumber.value});
-    };
-
-    const mouseEnter = () => {
-      if (store.state.mouseIsDown) {
-        on();
-      }
-    }
-
     const isBlack = computed(() => {
       const tone = noteNumber.value % 12;
       return [1, 3, 6, 8, 10].includes(tone);
@@ -107,9 +88,6 @@ export default defineComponent({
       noteNumber,
       isActive,
       isAuto,
-      on,
-      off,
-      mouseEnter,
       isBlack,
     }
   }
