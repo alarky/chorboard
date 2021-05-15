@@ -50,7 +50,11 @@ export const store = createStore<State>({
       state.keyIsDown[v] = false;
     },
     activeOctave(state, {v}) {
+      const offset = (v - state.activeOctave) * 12;
       state.activeOctave = v;
+      for (const id in state.chords) {
+        state.chords[id].baseNote.number += offset;
+      }
     },
     addNote(state, {v}) {
       state.activeNotes[v.number] = v;
