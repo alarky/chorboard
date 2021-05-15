@@ -69,14 +69,12 @@ export class midiIO {
         });
     }
 
-    public output(activeNotes: {[name: number]: Note}) {
+    public output(activeNotes: {[name: number]: Note}): void {
         if (!this.activeOutputID) return;
 
         let midiOutput: MIDIOutput = this.outputs[0];
         for (const output of this.outputs) {
-            console.log(output);
             if (output.id === this.activeOutputID) {
-                console.log("hit");
                 midiOutput = output;
             }
         }
