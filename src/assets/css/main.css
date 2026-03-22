@@ -1,0 +1,36 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+
+@theme {
+  --font-header: 'aviano-future', 'Futura', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-body: 'futura-pt', 'Futura', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* Form styles */
+input, select, button {
+  @apply m-4 rounded-xl;
+}
+
+input[type='text'],
+input[type='number'],
+select {
+  @apply px-8 py-2 rounded-xl bg-gray-300 border border-gray-400;
+}
+
+select {
+  appearance: none;
+  background-image: none;
+}
+
+input[type='number'] {
+  @apply pr-3;
+}
+
+button {
+  @apply px-8 py-2 bg-gray-300 border border-gray-400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-header;
+}
+
