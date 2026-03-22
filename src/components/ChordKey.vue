@@ -1,22 +1,9 @@
 <template>
   <div class="chord-key">
-    <div class="chord-key-edit-row">
-      <select class="base-note-selector" v-model="baseNote">
-        <option v-for="name in noteNames" :key="name" :value="name">{{ name }}</option>
-      </select>
-      <select class="chord-selector space-left" v-model="chordType">
-        <option v-for="(cymbol, name) in ChordCymbols" :key="name" :value="name">{{ cymbol }}</option>
-      </select>
-    </div>
-    <div class="chord-key-edit-row space-top">
-      <select class="on-note-selector">
-        <option v-if="rootNoteName">/{{ rootNoteName }}</option>
-      </select>
-      <div @click="rotate(-1)" class="rotate space-left">
-        <div class="material-icons material-icons-outlined">rotate_left</div>
-      </div>
-      <div @click="rotate(1)" class="rotate space-left">
-        <div class="material-icons material-icons-outlined">rotate_right</div>
+    <div class="chord-key-label">
+      <span class="chord-name">{{ chord.displayName }}</span>
+      <div class="edit-button" @click="$emit('edit', onKey)">
+        <div class="material-icons material-icons-outlined">edit</div>
       </div>
     </div>
     <div class="chord-key-button" :class="{ active: chord.isOn }"
@@ -36,53 +23,33 @@
 @reference "@/assets/css/main.css";
 
 .chord-key {
-  height: 180px;
+  height: 160px;
   width: 130px;
 }
 
-.chord-key-edit-row {
-  height: 24px;
+.chord-key-label {
+  height: 28px;
   width: 100%;
-  @apply flex justify-center items-center;
+  @apply flex justify-between items-center px-1;
 }
 
-select, button {
-  @apply rounded-md;
-  margin: 0;
-  padding: 0 0 0 0.7em;
+.chord-name {
+  @apply text-sm text-gray-600 truncate;
 }
 
-.base-note-selector {
-  width: 40px;
-}
-
-.space-left {
-  margin-left: 5px;
-}
-
-.space-top {
-  margin-top: 5px;
-}
-
-.chord-selector {
-  width: 85px;
-}
-
-.on-note-selector {
-  width: 40px;
-}
-
-.rotate {
-  width: 40px;
+.edit-button {
+  width: 24px;
   height: 24px;
-  @apply text-gray-500 border border-gray-400 rounded-md flex justify-center items-center;
+  cursor: pointer;
+  @apply text-gray-400 flex justify-center items-center rounded;
 }
 
-.rotate > div {
-  margin-top: 2px;
-  margin-left: 2px;
-  font-size: 18px;
-  user-select: none;
+.edit-button:hover {
+  @apply text-gray-600 bg-gray-200;
+}
+
+.edit-button .material-icons {
+  font-size: 16px;
 }
 
 .chord-key-button {
@@ -91,7 +58,7 @@ select, button {
   box-shadow: .2em .2em .4em #aebcc9, -.2em -.2em .4em #fff;
   height: 120px;
   width: 100%;
-  margin-top: 7px;
+  margin-top: 4px;
   user-select: none;
 }
 
@@ -111,7 +78,7 @@ select, button {
 import { computed, watch } from 'vue'
 import { useChorboardStore } from '@/stores/chorboard'
 import Note, { NoteNameMap } from '@/model/note'
-import Chord, { ChordCymbols } from '@/model/chord'
+import Chord from '@/model/chord'
 
 const props = withDefaults(defineProps<{
   onKey?: string
@@ -123,12 +90,14 @@ const props = withDefaults(defineProps<{
   chordName: 'None',
 })
 
+defineEmits<{
+  edit: [key: string]
+}>()
+
 const store = useChorboardStore()
 
-const noteNames = computed(() => Object.values(NoteNameMap).reverse())
-
 function noteNumber(noteName: string): number {
-  let no = store.activeOctave * 12
+  const no = store.activeOctave * 12
   for (const key in NoteNameMap) {
     const num = Number(key)
     if (NoteNameMap[num] === noteName) {
@@ -143,32 +112,12 @@ store.addChord(_chord)
 
 const chord = computed(() => store.chords[props.onKey])
 
-const baseNote = computed({
-  get: () => chord.value.baseNote.name,
-  set: (v: string) => store.setChordBaseNote(chord.value.id, new Note(noteNumber(v), 127)),
-})
-
-const chordType = computed({
-  get: () => chord.value.chordType,
-  set: (v: string) => store.setChordType(chord.value.id, v),
-})
-
-const rootNoteName = computed(() => {
-  if (chord.value.rotation === 0) return ''
-  const num = chord.value.notes[0].number % 12
-  return NoteNameMap[num]
-})
-
 function on() {
   store.onChord(chord.value.id, 127)
 }
 
 function off() {
   store.offChord(chord.value.id)
-}
-
-function rotate(v: number) {
-  store.rotateChord(chord.value.id, v)
 }
 
 watch(() => store.keyIsDown[props.onKey], (isDown) => {

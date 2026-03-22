@@ -44,11 +44,15 @@ export const useChorboardStore = defineStore('chorboard', () => {
   }
 
   function setChordType(id: string, v: string) {
-    chords[id].chordType = v
+    chords[id].setChordType(v)
   }
 
-  function rotateChord(id: string, v: number) {
-    chords[id].rotate(v)
+  function setChordVoicing(id: string, offsets: number[]) {
+    chords[id].setVoicing(offsets)
+  }
+
+  function setChordBassNote(id: string, v: Note | null) {
+    chords[id].bassNote = v
   }
 
   function updateActiveNotes() {
@@ -118,7 +122,8 @@ export const useChorboardStore = defineStore('chorboard', () => {
     addChord,
     setChordBaseNote,
     setChordType,
-    rotateChord,
+    setChordVoicing,
+    setChordBassNote,
     onChord,
     offChord,
     setMidiInput,
